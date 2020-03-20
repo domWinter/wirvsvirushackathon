@@ -2,25 +2,6 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-mockBedLists = [ { 'id' : 0,
-                  'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': True },
-                             { 'id' : 1, 'ventilator': False, 'intensive': False, 'free': False },
-                             { 'id' : 2, 'ventilator': True, 'intensive': False, 'free': False },
-                             { 'id' : 3, 'ventilator': True, 'intensive': True, 'free': False }]
-                },
-                { 'id' : 1,
-                  'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': True },
-                             { 'id' : 1, 'ventilator': True, 'intensive': False, 'free': True },
-                             { 'id' : 2, 'ventilator': True, 'intensive': False, 'free': True },
-                             { 'id' : 3, 'ventilator': True, 'intensive': False, 'free': False }]
-                },
-                { 'id' : 2,
-                  'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': False },
-                             { 'id' : 1, 'ventilator': False, 'intensive': True, 'free': False },
-                             { 'id' : 2, 'ventilator': True, 'intensive': True, 'free': False },
-                             { 'id' : 3, 'ventilator': True, 'intensive': True, 'free': False }]
-                }]
-
 
 mockHospitals = [
 
@@ -29,14 +10,14 @@ mockHospitals = [
       'phoneNumber' : '08967940',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/neuperlach/',
       'location': {'latitude': 48.094510, 'longitude' : 11.656720},
-      'bedListID': 0},
+      'beds': { 'iculc': 500, 'icuhc': 40, 'ecmo': 20}},
 
     { 'id': 1, 'name':  "München Klinik Bogenhausen", 
       'address': {'state' : "Bayern" , 'city' : "München", 'plz': 81925, 'street' : "Englschalkinger Str.", 'streetNumber': "77"},
       'phoneNumber' : '08992700',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/bogenhausen/',
       'location': {'latitude': 48.155404, 'longitude': 11.624846},
-      'bedListID': 1},
+      'beds': { 'iculc': 600, 'icuhc': 30, 'ecmo': 10}},
 
 
     { 'id': 2, 'name':  "München Klinik Schwabing", 
@@ -44,7 +25,7 @@ mockHospitals = [
       'phoneNumber' : '08930680',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/schwabing/',
       'location': {'latitude': 48.171982, 'longitude' : 11.578332},
-      'bedListID': 2}
+      'beds': { 'iculc': 300, 'icuhc': 20, 'ecmo': 5}}
 ]
 
 @app.route('/add/hospital', methods=['POST'])
@@ -55,22 +36,3 @@ def addHospital():
 def getHospitals():
     return {'hospitals': mockHospitals}, 200
 
-@app.route('/hospital/beds', methods=['GET'])
-def getBedsByHospital():
-    data = request.get_json()
-    requestHospitalID = data['id']
-
-    bedList = {}
-    bedListID = ''
-
-    for hospital in mockHospitals:
-        if hospital['id'] == requestHospitalID:
-            bedListID = hospital['bedListID']
-            break
-
-    for bedlist in mockBedLists:
-        if bedlist['id'] == bedListID:
-            bedList = bedlist
-            break
-
-    return {'bedList' : bedList}, 200
