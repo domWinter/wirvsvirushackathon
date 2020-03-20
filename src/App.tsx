@@ -14,18 +14,18 @@ const repository : Repository = new MockRepository();
 const exampleHospital : Hospital = repository.getHospitalById(1234);
 
 const App = ({ className } : AppProps) => (
-  <div className="App">
-  <FormattedMessage
-    id="app.greeting"
-    description="Greeting to welcome the user to the app"
-    defaultMessage="Hello, {name}!"
-    values={{
-      name: 'Alex',
-    }}>
-    {(txt) =>
-      <p className={className}>{txt}</p>
-    }
-  </FormattedMessage>
+  <div className={className}>
+    <FormattedMessage
+      id="app.greeting"
+      description="Greeting to welcome the user to the app"
+      defaultMessage="Hello, {name}!"
+      values={{
+        name: 'Alex',
+      }}>
+      {(txt) =>
+        <p>{txt}</p>
+      }
+    </FormattedMessage>
     <HospitalComponent {...exampleHospital} />
   </div>
 );
