@@ -6,14 +6,14 @@ app = Flask(__name__)
 mockHospitals = [
 
     { 'id': 0, 'name':  "München Klinik Neuperlach", 
-      'address': {'state' : "Bayern" , 'city' : "München", 'plz': 81373, 'street' : "Oskar-Maria-Graf-Ring", 'streetNumber': "51"},
+      'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "81373", 'street' : "Oskar-Maria-Graf-Ring", 'streetNumber': "51"},
       'phoneNumber' : '08967940',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/neuperlach/',
       'location': {'latitude': 48.094510, 'longitude' : 11.656720},
       'beds': { 'iculc': 500, 'icuhc': 40, 'ecmo': 20}},
 
     { 'id': 1, 'name':  "München Klinik Bogenhausen", 
-      'address': {'state' : "Bayern" , 'city' : "München", 'plz': 81925, 'street' : "Englschalkinger Str.", 'streetNumber': "77"},
+      'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "81925", 'street' : "Englschalkinger Str.", 'streetNumber': "77"},
       'phoneNumber' : '08992700',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/bogenhausen/',
       'location': {'latitude': 48.155404, 'longitude': 11.624846},
@@ -21,7 +21,7 @@ mockHospitals = [
 
 
     { 'id': 2, 'name':  "München Klinik Schwabing", 
-      'address': {'state' : "Bayern" , 'city' : "München", 'plz': 80804, 'street' : "Kölner Pl.", 'streetNumber': "1"},
+      'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "80804", 'street' : "Kölner Pl.", 'streetNumber': "1"},
       'phoneNumber' : '08930680',
       'website' : 'https://www.muenchen-klinik.de/krankenhaus/schwabing/',
       'location': {'latitude': 48.171982, 'longitude' : 11.578332},
@@ -36,3 +36,14 @@ def addHospital():
 def getHospitals():
     return {'hospitals': mockHospitals}, 200
 
+@app.route('/hospital', methods=['GET'])
+def getHospitalByID():
+    data = request.get_json()
+    requestHospitalID = data['id']
+    hospital = {}
+
+    for hospital in mockHospitals:
+        if hospital['id'] == requestHospitalID:
+            return {'hospital': hospital}, 200
+
+    return {'hospital': {}}, 404
