@@ -1,18 +1,12 @@
-import { Hospital, BedList } from './types';
+import { Hospital, BedList, Repository as RepositoryI } from './types';
 
-export interface Repository {
-    getHospitals() : Hospital[];
-    getHospitalById(id: number) : Hospital;
-    getBedListById(id: number) : BedList;
-}
-
-export class MockRepository implements Repository {
-    getHospitals(): Hospital[] {
-        throw new Error("Method not implemented.");
+export class Repository implements RepositoryI {
+    getHospitals(): Promise<Hospital[]> {
+        return Promise.reject(new Error("Method not implemented."));
     }
-    getHospitalById(id: number): Hospital {
+    getHospitalById(id: number): Promise<Hospital> {
         if(id === 1234) {
-            return {
+            return Promise.resolve({
                 id:1234,
                 name:'Example',
                 address:{
@@ -29,21 +23,20 @@ export class MockRepository implements Repository {
                     latitude: 27.2713
                 },
                 bedListId:1234
-            };
+            });
         }
-        throw new Error('No such hospital');
+        return Promise.reject(new Error('No such hospital'));
     }
-    getBedListById(id: number): BedList {
+    getBedListById(id: number): Promise<BedList> {
         if(id === 27) {
-            return {
+            return Promise.resolve({
                 id: 27,
                 beds: [
                     { id: 1, ventilator: false, intensive: false, free: true },
                     { id: 2, ventilator: true, intensive: true, free: false }
                 ]
-            }
+            });
         }
-        throw new Error('No such bed list');
+        return Promise.reject(new Error('No such bed list'));
     }
-
 }

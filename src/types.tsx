@@ -1,3 +1,9 @@
+export interface Repository {
+    getHospitals() : Promise<Hospital[]>;
+    getHospitalById(id: number) : Promise<Hospital>;
+    getBedListById(id: number) : Promise<BedList>;
+}
+
 export type Address = {
     state: string,
     city: string,
