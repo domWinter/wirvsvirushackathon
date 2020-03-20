@@ -1,4 +1,4 @@
-import { Hospital, BedList, Repository as RepositoryI } from './types';
+import { Hospital, BedList, Repository as RepositoryI } from '../types';
 
 export class Repository implements RepositoryI {
     getHospitals(): Promise<Hospital[]> {

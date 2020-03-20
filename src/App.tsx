@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Hospital from './components/Hospital';
 // TODO change to real repository
-import { Repository } from './repository';
+import { Repository } from './client/repository';
 import {
   Hospital as HospitalI,
   Repository as RepositoryI
