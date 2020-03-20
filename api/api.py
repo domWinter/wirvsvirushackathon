@@ -2,7 +2,7 @@ from flask import Flask, request
 
 app = Flask(__name__)
 
-mockBedlists = [ { 'id' : 0,
+mockBedLists = [ { 'id' : 0,
                   'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': True },
                              { 'id' : 1, 'ventilator': False, 'intensive': False, 'free': False },
                              { 'id' : 2, 'ventilator': True, 'intensive': False, 'free': False },
@@ -47,10 +47,12 @@ mockHospitals = [
       'bedListID': 2}
 ]
 
-@app.route('/hospitals', methods=['GET'])
+@app.route('/add/hospital', methods=['POST'])
+def addHospital():
+    return {'success': True}, 200
 
+@app.route('/hospitals', methods=['GET'])
 def getHospitals():
-    
     return {'hospitals': mockHospitals}, 200
 
 @app.route('/hospital/beds', methods=['GET'])
@@ -66,9 +68,9 @@ def getBedsByHospital():
             bedListID = hospital['bedListID']
             break
 
-    for bedlist in mockBedlists:
+    for bedlist in mockBedLists:
         if bedlist['id'] == bedListID:
             bedList = bedlist
             break
 
-    return {'bedList' : bedList}
+    return {'bedList' : bedList}, 200
