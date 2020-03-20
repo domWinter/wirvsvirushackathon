@@ -6,7 +6,6 @@ import { Hospital } from './types';
 import styled from 'styled-components';
 import { FormattedMessage } from "react-intl";
 
-
 type AppProps = {
   className?: string
 }

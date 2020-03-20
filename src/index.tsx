@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import * as serviceWorker from './serviceWorker';
 import './index.css';
-import App from './App';
 import { IntlProvider } from "react-intl";
 import { LOCALE, MESSAGES } from './constants/localisation/de';
+import App from './App';
 
 ReactDOM.render(
   <IntlProvider locale={LOCALE} messages={MESSAGES}>
