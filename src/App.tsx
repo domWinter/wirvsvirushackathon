@@ -1,25 +1,21 @@
 import React from 'react';
 //import logo from './logo.svg';
-import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {ListGroup, ListGroupItem, Button, Form} from 'react-bootstrap';
+import styled from 'styled-components';
 
-
-type Todo = {
-  id: number,
-  title: string,
-  done?: boolean
+type AppProps = {
+  className?: string
 }
 
-class App extends React.Component {
+const App = ({ className } : AppProps) => (
+  <div className={className}>
+    Hello world
+  </div>
+);
 
-  render() {
-    return (
-      <div className="App">
-        hello world
-      </div>
-    )
-  }
-}
 
-export default App;
+const StyledApp = styled(App)`
+  text-align: center;
+`;
+
+export default StyledApp;
