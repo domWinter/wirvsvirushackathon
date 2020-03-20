@@ -1,8 +1,8 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HospitalComponent from './components/hospital';
+import Hospital from './components/Hospital';
 import { Repository, MockRepository } from './repository';
-import { Hospital } from './types';
+import { Hospital as HospitalProps } from './types';
 import styled from 'styled-components';
 import { FormattedMessage } from "react-intl";
 
@@ -11,7 +11,7 @@ type AppProps = {
 }
 
 const repository : Repository = new MockRepository();
-const exampleHospital : Hospital = repository.getHospitalById(1234);
+const exampleHospital : HospitalProps = repository.getHospitalById(1234);
 
 const App = ({ className } : AppProps) => (
   <div className={className}>
@@ -26,7 +26,7 @@ const App = ({ className } : AppProps) => (
         <p>{txt}</p>
       }
     </FormattedMessage>
-    <HospitalComponent {...exampleHospital} />
+    <Hospital {...exampleHospital} />
   </div>
 );
 

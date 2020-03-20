@@ -18,7 +18,7 @@ export class MockRepository implements Repository {
                 address:{
                     state: 'Bavaria',
                     city: 'Augsburg',
-                    plz: 86153,
+                    postcode: '86153',
                     street: 'Friedrich-List-Str.',
                     streetNumber: 2
                 },

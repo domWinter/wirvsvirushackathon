@@ -1,8 +1,7 @@
-
 export type Address = {
     state: string,
     city: string,
-    plz: number,
+    postcode: string,
     street: string,
     streetNumber: number
 };
