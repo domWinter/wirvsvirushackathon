@@ -9,16 +9,16 @@ mockBedlists = [ { 'id' : 0,
                              { 'id' : 3, 'ventilator': True, 'intensive': True, 'free': False }]
                 },
                 { 'id' : 1,
-                  'beds' : [ { 'ventilator': True, 'intensive': True, 'free': True },
-                             { 'ventilator': True, 'intensive': False, 'free': True },
-                             { 'ventilator': True, 'intensive': False, 'free': True },
-                             { 'ventilator': True, 'intensive': False, 'free': False }]
+                  'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': True },
+                             { 'id' : 1, 'ventilator': True, 'intensive': False, 'free': True },
+                             { 'id' : 2, 'ventilator': True, 'intensive': False, 'free': True },
+                             { 'id' : 3, 'ventilator': True, 'intensive': False, 'free': False }]
                 },
                 { 'id' : 2,
-                  'beds' : [ { 'ventilator': True, 'intensive': True, 'free': False },
-                             { 'ventilator': False, 'intensive': True, 'free': False },
-                             { 'ventilator': True, 'intensive': True, 'free': False },
-                             { 'ventilator': True, 'intensive': True, 'free': False }]
+                  'beds' : [ { 'id' : 0, 'ventilator': True, 'intensive': True, 'free': False },
+                             { 'id' : 1, 'ventilator': False, 'intensive': True, 'free': False },
+                             { 'id' : 2, 'ventilator': True, 'intensive': True, 'free': False },
+                             { 'id' : 3, 'ventilator': True, 'intensive': True, 'free': False }]
                 }]
 
 
