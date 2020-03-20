@@ -1,8 +1,9 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {ListGroup, ListGroupItem, Button, Form} from 'react-bootstrap';
+import HospitalComponent from './components/hospital';
+import { Repository, MockRepository } from './repository';
+import { Hospital } from './types';
 
 
 type Todo = {
@@ -12,11 +13,13 @@ type Todo = {
 }
 
 class App extends React.Component {
-
   render() {
+    const repository : Repository = new MockRepository();
+    const exampleHospital : Hospital = repository.getHospitalById(1234);
+
     return (
       <div className="App">
-        hello world
+        <HospitalComponent {...exampleHospital} />
       </div>
     )
   }
