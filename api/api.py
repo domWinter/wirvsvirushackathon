@@ -45,11 +45,7 @@ def getHospitals():
                               'website' : str(row[8]),
                               'location' : { 'latitude' : str(row[9]), 
                                              'longitude' : str(row[10]) 
-                                           },
-                              'beds' : { 'iculc' : int(row[11]), 
-                                         'icuhc' : int(row[12]), 
-                                         'ecmo' : int(row[13])
-                                        }
+                                           }
                             }) 
     except:
         return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
@@ -75,11 +71,7 @@ def getHospitalByID():
                 'website' : str(hospitalSQL[8]),
                 'location' : { 'latitude' : str(hospitalSQL[9]), 
                                'longitude' : str(hospitalSQL[10]) 
-                             },
-                'beds' : { 'iculc' : int(hospitalSQL[11]), 
-                           'icuhc' : int(hospitalSQL[12]), 
-                           'ecmo' : int(hospitalSQL[13])
-                         }
+                             }
                 }
 
     return json.dumps({"data": hospital}), 200, {'ContentType':'application/json'}
@@ -96,15 +88,11 @@ def addHospital():
 
     hospital = request.get_json()['data']
 
-    if not all(k in hospital for k in ("name","address","phoneNumber","website","beds")):
+    if not all(k in hospital for k in ("name","address","phoneNumber","website")):
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
 
     if not all(k in hospital['address'] for k in ("state","city","postcode","street","streetNumber")):
-        return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
-
-
-    if not all(k in hospital['beds'] for k in ("iculc","icuhc","ecmo")):
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
     try:
@@ -117,7 +105,7 @@ def addHospital():
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
-    success = databaseUtils.addHospital(conn, hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude, hospital['beds']['iculc'], hospital['beds']['icuhc'], hospital['beds']['ecmo'])
+    success = databaseUtils.addHospital(conn, hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude)
     if not success:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
