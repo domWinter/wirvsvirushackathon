@@ -1,48 +1,39 @@
-import psycopg2
-from utils import getLocation
+from geoUtils import getGeoLocation
 
-
-
-
-
-def connectDB():
-    
+def getAllHospitals(conn):
+    cur = conn.cursor()
     try:
-        conn = psycopg2.connect(database = "wirvsvirushackathon", user = "app@postgres-wirvsvirushackathon", password = "dvDKQDP2t4g5Mso7P8", host = "postgres-wirvsvirushackathon.postgres.database.azure.com", port = "5432")
-        return conn
+        query =  "SELECT * FROM hospitals;"
+        cur.execute(query)
+        hospitalsSQL = cur.fetchall()
+        return hospitalsSQL
     except:
-        print("I am unable to connect to the database") 
-
-    
-    
+        return None
 
 
-def addInitialTables(conn):
+def getHospitalbyID(conn, hospitalID):
+    cur = conn.cursor()
     try:
-        conn.cursor().execute("CREATE TABLE hospitals (id serial PRIMARY KEY, name varchar(255), state varchar(255), city varchar(255), postcode varchar(255), street varchar(255), streetNumber varchar(255), phoneNumber varchar(255) , website varchar(255) , latitude varchar(255) , longitude varchar(255) , inculc integer, incuh integer, ecmo integer);")
-        conn.commit()
+        query =  "SELECT * FROM hospitals WHERE id = %s;"
+        cur.execute(query, hospitalID)
+        hospitalSQL = cur.fetchall()
+        return hospitalSQL
     except:
-        print("table create failed")
-    
+        return None
 
-
-
-def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude=0,longitude=0,inculc=0,incuh=0,ecmo=0):
-
-    if longitude==0 or latitude ==0 :
-        latitude,longitude = getLocation(street,streetNumber,city)
-    
-    sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, inculc, incuh, ecmo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, inculc, incuh, ecmo)
+def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude=0,longitude=0,iculc=0,icuhc=0,ecmo=0):
+    cur = conn.cursor()
+    sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, iculc, icuhc, ecmo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, iculc, icuhc, ecmo)
     try:
-        conn.cursor().execute(sql, val)
+        cur.execute(sql, val)
         conn.commit()
     except: 
-        print("Insert failed")
+        return False
+    return True
     
 
-def updateBeds(conn,hospitalID,bedType,amount):
-    
+def updateBeds(conn, hospitalID,bedType,amount):
     sql  = "UPDATE hospitals SET {} = %s WHERE id = %s".format(bedType)
     val = (amount, hospitalID)
     try:    
@@ -51,20 +42,3 @@ def updateBeds(conn,hospitalID,bedType,amount):
     except Exception as inst:
         print("Update beds failed")
         print(inst.args)
-    
-
-def closeDB(conn): 
-    try: 
-        conn.close()
-    except:
-        print("Unable to close db connection")
-
-
-def main():
-    conn = connectDB()
-    #addHospital(conn,"BigHospital","Bavaria","Munich","80809","Test-Straße","1","555-1234","großer-test.de")
-    
-    updateBeds(conn,1,"inculc",333)
-    closeDB(conn)
-
-main()
