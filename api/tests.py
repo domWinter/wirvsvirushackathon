@@ -22,4 +22,4 @@ def testHospital(id):
     print(r.text)
 
 
-testHospitalAdd()
+testHospital(1)

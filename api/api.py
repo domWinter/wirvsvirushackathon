@@ -1,6 +1,7 @@
-import psycopg2
 import os
 import json
+import psycopg2
+import databaseUtils
 from flask import Flask, request, jsonify
 from geoUtils import getGeoLocation
 
@@ -11,7 +12,7 @@ PASSWORD = os.getenv('PASSWORD')
 try:
     conn = psycopg2.connect(database = "wirvsvirushackathon", 
                             user = "app@postgres-wirvsvirushackathon", 
-                            password = PASSWORD , 
+                            password = PASSWORD, 
                             host = "postgres-wirvsvirushackathon.postgres.database.azure.com", 
                             port = "5432")
 except:
@@ -23,11 +24,9 @@ cur = conn.cursor()
 
 @app.route('/hospitals', methods=['GET'])
 def getHospitals():
-    try:
-        query =  "SELECT * FROM hospitals;"
-        cur.execute(query)
-        hospitalsSQL = cur.fetchall()
-    except:
+
+    hospitalsSQL = databaseUtils.getAllHospitals(conn)
+    if hospitalsSQL is None:
         return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
 
     hospitals = []
@@ -60,13 +59,9 @@ def getHospitals():
 @app.route('/hospital', methods=['GET'])
 def getHospitalByID():
     requestHospitalID = request.args.get('id')
-
-    try:
-        query =  "SELECT * FROM hospitals WHERE id = %s;"
-        cur.execute(query, requestHospitalID)
-        hospitalSQL = cur.fetchall()[0]
-    except:
-        json.dumps({"data": {} }), 500, {'ContentType':'application/json'}
+    hospitalSQL = databaseUtils.getHospitalbyID(conn, requestHospitalID)[0]
+    if hospitalSQL is None:
+        return json.dumps({"data": {} }), 500, {'ContentType':'application/json'}
 
     hospital = {'id' : int(hospitalSQL[0]), 
                 'name': str(hospitalSQL[1]), 
@@ -122,18 +117,8 @@ def addHospital():
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
-    try:
-        sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, inculc, incuh, ecmo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude, hospital['beds']['iculc'], hospital['beds']['icuhc'], hospital['beds']['ecmo'])
-    except:
-        return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
-
-    try:
-        conn.cursor().execute(sql, val)
-        conn.commit()
-    except:
-        if conn is not None:
-            conn.close()
+    success = databaseUtils.addHospital(conn, hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude, hospital['beds']['iculc'], hospital['beds']['icuhc'], hospital['beds']['ecmo'])
+    if not success:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
     return json.dumps({"data": {'success' : True} }), 200, {'ContentType':'application/json'}
