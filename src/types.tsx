@@ -31,7 +31,7 @@ export type MapDataEntry =
 
 export type MapData = MapDataEntry[];
 
-export type Marker = Location & Pick<Hospital, "name">
+export type Marker = Location & Extract<Hospital, "name" | "timestamp">
 
 export type Location = {
     longitude: number,

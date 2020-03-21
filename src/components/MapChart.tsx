@@ -87,7 +87,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name={intl.formatMessage(messages.marker)} checked>
           <FeatureGroup color="purple">
-            {markers.map(({longitude,latitude,name},i) => 
+            {markers.map(({longitude,latitude,name,timestamp},i) => 
               <Marker key={i} position={[longitude,latitude]} >
                 <Popup>
                   <span>{name}</span>

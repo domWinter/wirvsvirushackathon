@@ -1,14 +1,14 @@
 import React, { useEffect, useState }  from 'react';
 
-import { HeatMap, Marker } from '../types';
+import { MapDataEntry, HeatMap, Marker } from '../types';
 import Client from '../client/client';
 import Map from './MapChart';
 
 export const MapRoute = () => {
-  const [heatMap, setHeatMap] = useState<HeatMap | undefined>()
-  const [markers, setMarkers] = useState<Marker[] | undefined>()
+  const [heatMap, setHeatMap] = useState<HeatMap | undefined>();
+  const [markers, setMarkers] = useState<Marker[] | undefined>();
   const transformData = (mapData) => {
-    const { heatMap, markers } = mapData.reduce(({marker, heatMap}, {
+    const { heatMap, markers } = mapData.reduce(({markers, heatMap}, {
       name,
       longitude,
       latitude,
@@ -18,23 +18,23 @@ export const MapRoute = () => {
       icuhcMax,
       ecmo,
       ecmoMax,
-      timestap,
+      timestamp,
       ...rest
-      }) => {
+    }:MapDataEntry) => {
       return {
-        marker,
+        markers: [...markers, {longitude,latitude,name,timestamp}],
         heatMap: [
           ...heatMap,
           {
             longitude,
             latitude,
-            iculcItensity: (parseFloat(iculcMax)-iculc)/iculcMax,
-            icuhcItensity: (parseFloat(icuhcMax)-icuhc)/icuhcMax,
-            ecmoItensity: (parseFloat(ecmoMax)-ecmo)/ecmoMax,
+            iculcIntensity: iculc*1.0/iculcMax,
+            icuhcIntensity: icuhc*1.0/icuhcMax,
+            ecmoIntensity: ecmo*1.0/ecmoMax
           }
         ]
       };
-    }, {marker: [], heatMap: []});
+    }, {markers: [], heatMap: []});
     setHeatMap(heatMap);
     setMarkers(markers);
   }

@@ -59,8 +59,7 @@ export class Client implements RepositoryI {
   }
 
   getMapData() : Promise<MapData> {
-    // return get({ path: '/mapdata' });
-    return Promise.resolve([]);
+    return get({ path: '/mapdata' });
   }
 }
 

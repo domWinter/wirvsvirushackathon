@@ -31,7 +31,7 @@ export const HospitalRoute = () => {
   });
 
   const transformBedAvailability = (bedAvailability)  => {
-    const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest}) => {
+    const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest} : BedAvailabilityI) => {
       // const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
       const xDate = intl.formatDate(timestamp);
       return {
@@ -89,7 +89,7 @@ export const HospitalRoute = () => {
         <Col>
           <Card className="bg-dark text-white">
           <Card.Header><h2>{intl.formatMessage(messages.bedCapacity)}</h2></Card.Header>
-            {bedAvailabilityData && JSON.stringify(bedAvailabilityData)}
+            {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
           </Card> 
            <Button size="sm" variant="light"><Link to='/'>{intl.formatMessage(messages.back)}</Link></Button>
         </Col>
@@ -99,5 +99,5 @@ export const HospitalRoute = () => {
   );
 };
 
-            // {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
+            
 export default HospitalRoute;
