@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HospitalRoute from './components/HospitalRoute';
 import HospitalsRoute from './components/HospitalsRoute';
+import MapChart from './components/MapChart';
 
 type AppProps = {
   className?: string
@@ -17,6 +18,9 @@ const App = ({ className } : AppProps) => {
         <Switch>
           <Route path='/hospital/:id'>
             <HospitalRoute />
+          </Route>
+          <Route path='/map'>
+            <MapChart />
           </Route>
           <Route path='/'>
             <HospitalsRoute />
