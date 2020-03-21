@@ -33,14 +33,14 @@ export class Client implements RepositoryI {
 
   getBedAvailability(id : number): Promise<BedAvailability[]> {
     return get({
-      path: '/bedAvailability',
+      path: '/bedavailability',
       params: { id }
     });
   }
 
   getBedAvailabilityLatest(id : number): Promise<BedAvailability> {
     return get({
-      path: '/bedAvailability/latest',
+      path: '/bedavailability/latest',
       params: { id }
     });
   }

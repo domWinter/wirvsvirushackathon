@@ -1,9 +1,6 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { Hospital as HospitalProps } from '../types';
 import { FormattedMessage } from "react-intl";
-
-import LineChart from "./LineChart";
 
 const Hospital = ({
   address: {city, postcode, state, street, streetNumber},
@@ -53,30 +50,6 @@ const Hospital = ({
         <p>{txt}: {phoneNumber}</p>
       }
     </FormattedMessage>
-
-    <FormattedMessage
-      id="availableBeds"
-      description="available beds"
-      defaultMessage="Available Beds"
-    >
-      {(availableBeds) =>
-        <h3>{availableBeds}:</h3>
-      }
-    </FormattedMessage>
-    <LineChart height={'400px'} width={'100%'} data={[{
-      "id": name,
-      "data": [
-        {
-          "x": "10.03.2020",
-          "y": 238
-        },
-        {
-          "x": "11.03.2020",
-          "y": 284
-        }
-      ]
-    }]}/>
-    <Link to='/'>Back</Link>
   </>
 );
 
