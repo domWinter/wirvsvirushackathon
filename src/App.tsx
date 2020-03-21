@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Hospital from './components/Hospital';
 import HospitalList from './components/HospitalList';
-import HospitalPreview from './components/HospitalPreview';
 // TODO change to real repository
 import { Repository } from './client/client';
 import {
@@ -19,12 +17,8 @@ type AppProps = {
 const repository : RepositoryI = new Repository();
 
 const App = ({ className } : AppProps) => {
-  const [hospital, setHospital] = useState<HospitalI | undefined>()
   const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
   useEffect(() => {
-    repository.getHospitalById(1234)
-    .then(setHospital)
-    .catch((error) => console.log("Cannot fetch hospital"));
     repository.getHospitals()
     .then(setHospitals)
     .catch((error) => console.log("Cannot fetch hospitals"));
@@ -43,7 +37,6 @@ const App = ({ className } : AppProps) => {
           <p>{txt}</p>
         }
       </FormattedMessage>
-      {hospital && <Hospital {...hospital}/>}
       {hospitals && <HospitalList hospitals={hospitals}/>}
     </div>
   );
