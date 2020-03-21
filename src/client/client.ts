@@ -41,7 +41,7 @@ export class Client implements RepositoryI {
     return get({
       path: '/hospital',
       params: {
-        'id': 1
+        'id': id
       }
     });
   }

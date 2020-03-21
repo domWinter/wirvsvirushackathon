@@ -24,11 +24,6 @@ export class Repository implements RepositoryI {
                 location:{
                     longitude: 15.1234,
                     latitude: 27.2713
-                },
-                beds: {
-                    iculc: 50,
-                    icuhc: 27,
-                    ecmo: 10
                 }
             });
         }

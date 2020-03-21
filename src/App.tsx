@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Route, Switch, RouteComponentProps, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch, useLocation, useParams } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Hospital from './components/Hospital';
@@ -46,11 +46,11 @@ const App = ({ className } : AppProps) => {
       </FormattedMessage>
       <Router>
         <Switch>
-          <Route exact path='/'>
-            {hospitals && <HospitalList hospitals={hospitals}/>}
-          </Route>
-          <Route path='/hospital'>
+          <Route path='/hospital/:hospitalId'>
             <HospitalRoute />
+          </Route>
+          <Route path='/'>
+            {hospitals && <HospitalList hospitals={hospitals}/>}
           </Route>
         </Switch>
       </Router>
@@ -59,8 +59,24 @@ const App = ({ className } : AppProps) => {
 };
 
 function HospitalRoute() {
-  const hospital : HospitalI = useLocation().state as HospitalI;
-  return <Hospital {...hospital} />
+  const [hospital, setHospital] = useState<HospitalI>();
+  const hospitalFromState : HospitalI = useLocation().state as HospitalI;
+  let hospitalId: number = parseInt((useParams() as { hospitalId: string }).hospitalId);
+
+  client.getHospitalById(hospitalId)
+    .then(setHospital)
+    .catch((error) => console.log('Invalid ID'));
+  
+  if(hospitalFromState !== undefined) {
+    return <Hospital {...hospitalFromState} />;
+  }
+
+  return (
+    <div>
+      {hospital && <Hospital {...hospital} />}
+    </div>
+  );
+
 }
 
 const StyledApp = styled(App)`
