@@ -1,4 +1,4 @@
-import { BedAvailability, Hospital, Repository as RepositoryI } from '../types';
+import { BedAvailability, Hospital, MapData, Repository as RepositoryI } from '../types';
 import axios from 'axios';
 
 type getParams = {
@@ -56,6 +56,11 @@ export class Client implements RepositoryI {
       path: '/hospital',
       params: { id }
     });
+  }
+
+  getMapData() : Promise<MapData> {
+    // return get({ path: '/mapdata' });
+    return Promise.resolve([]);
   }
 }
 

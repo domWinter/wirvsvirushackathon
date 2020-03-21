@@ -1,6 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Table, Button } from 'react-bootstrap';
+import { FormattedMessage } from "react-intl";
+
 import { Hospital } from '../types';
 import HospitalPreview from './HospitalPreview';
 
@@ -15,13 +17,43 @@ const HospitalList = ({
         <div>
             <Table striped bordered hover variant="dark">
                 <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Adresse</th>
-                        <th>Telefon</th>
-                        <th>Website</th>
-                        <th>Info</th>
-                    </tr>
+                  <tr>
+                    <FormattedMessage
+                      id="name"
+                      description="name"
+                      defaultMessage="Name"
+                    >
+                      {(txt) => <th>{txt}</th>}
+                    </FormattedMessage>
+                    <FormattedMessage
+                      id="address"
+                      description="address"
+                      defaultMessage="Address"
+                    >
+                      {(address) =><th>{address}</th>}
+                    </FormattedMessage>
+                    <FormattedMessage
+                      id="phone"
+                      description="Phone number"
+                      defaultMessage="Phone number"
+                    >
+                      {(txt) => <th>{txt}</th>}
+                    </FormattedMessage>
+                    <FormattedMessage
+                      id="website"
+                      description="website"
+                      defaultMessage="Website"
+                    >
+                      {(websiteTxt) => <th>{websiteTxt}</th>}
+                    </FormattedMessage>
+                    <FormattedMessage
+                      id="information"
+                      description="information"
+                      defaultMessage="Information"
+                    >
+                      {(txt) => <th>{txt}</th>}
+                    </FormattedMessage>
+                  </tr>
                 </thead>
                 <tbody>
                 {hospitals.map((hospital, i) =>
@@ -31,12 +63,16 @@ const HospitalList = ({
                                 pathname: `/hospital/${hospital.id}`,
                                 state: hospital
                             }}>
-                            <Button size="sm" variant="info">Info</Button>{' '}
+                            <FormattedMessage
+                              id="open"
+                              description="open"
+                              defaultMessage="Open"
+                            >
+                              {(txt) => <Button size="sm" variant="info">{txt}</Button>}
+                            </FormattedMessage>
                             </Link>
                         </td>
                     </tr>
-
-                    
                 )}
                 </tbody>
             </Table>

@@ -10,10 +10,28 @@ export type BedAvailability = {
   id: number,
   hospitalID: number,
   iculc: number,
+  iculcMax: number,
   icuhc: number,
+  icuhcMax: number,
   ecmo: number,
+  ecmoMax: number,
   timestamp: string
 }
+
+export type HeatMapEntry = Location & {
+  iculcIntensity: number,
+  icuhcIntensity: number,
+  ecmoIntensity: number
+}
+
+export type HeatMap = HeatMapEntry[];
+
+export type MapDataEntry =
+  Exclude<Hospital, "location" | "address"> & Location & Address & BedAvailability;
+
+export type MapData = MapDataEntry[];
+
+export type Marker = Location & Pick<Hospital, "name">
 
 export type Location = {
     longitude: number,
@@ -26,7 +44,7 @@ export type Hospital = {
     address: Address,
     phoneNumber: string,
     website: string,
-    location: Location,
+    location: Location
 };
 
 export interface Repository {
@@ -35,4 +53,5 @@ export interface Repository {
     getBedAvailability(id: number) : Promise<BedAvailability[]>;
     getHospitals() : Promise<Hospital[]>;
     getHospitalById(id: number) : Promise<Hospital>;
+    getMapData() : Promise<MapData>;
 }

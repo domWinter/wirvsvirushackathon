@@ -23,7 +23,7 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
   const theme = {
     axis: {
       textColor: '#eee',
-      fontSize: '10px',
+      fontSize: '12px',
       tickColor: '#eee',
     },
     grid: {
@@ -54,7 +54,7 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
             legendOffset: -40,
             legendPosition: 'center'
         }}
-        dotSize={12}
+        dotSize={6}
         theme={theme}
         useMesh={true}
       />

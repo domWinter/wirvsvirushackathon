@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import { Button, Container, Row, Col, Card } from 'react-bootstrap';
 import { useIntl, defineMessages } from "react-intl";
 
 import {
@@ -22,6 +22,13 @@ export const HospitalRoute = () => {
   const [bedAvailabilityLatest, setBedAvailabilityLatest] = useState<BedAvailabilityI>();
   const [bedAvailabilityData, setBedAvailabilityData] = useState<any>();
   const intl = useIntl();
+  const messages = defineMessages({
+    iculc: { id: 'iculc', defaultMessage: 'ICULC' },
+    icuhc: { id: 'icuhc', defaultMessage: 'ICUHC' },
+    ecmo: { id: 'ecmo', defaultMessage: 'ECMO' },
+    back: { id: 'back', defaultMessage: 'Back' },
+    bedCapacity: { id: 'bedCapacity', defaultMessage: 'Bed Capacity' }
+  });
 
   const transformBedAvailability = (bedAvailability)  => {
     const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest}) => {
@@ -33,11 +40,6 @@ export const HospitalRoute = () => {
         dEcmo: [...dEcmo, {x: xDate, y: ecmo}]
       };
     }, {dIculc: [], dIcuhc: [], dEcmo: []});
-    const messages = defineMessages({
-      iculc: { id: 'iculc', defaultMessage: 'ICULC' },
-      icuhc: { id: 'icuhc', defaultMessage: 'ICUHC' },
-      ecmo: { id: 'ecmo', defaultMessage: 'ECMO' }
-    });
     setBedAvailabilityData([
       {
         id: intl.formatMessage(messages.iculc),
@@ -87,16 +89,16 @@ export const HospitalRoute = () => {
         <Col>
         
           <Card className="bg-dark text-white">
-          <Card.Header><h2>Bettenbelegung</h2></Card.Header>
-              {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
+          <Card.Header><h2>{intl.formatMessage(messages.bedCapacity)}</h2></Card.Header>
+            {bedAvailabilityData && JSON.stringify(bedAvailabilityData)}
           </Card> 
-          <Link to='/'>Back</Link>
+           <Button size="sm" variant="light"><Link to='/'>{intl.formatMessage(messages.back)}</Link></Button>
         </Col>
       </Row>
       </Container>
-      
    </>
   );
 };
 
+            // {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
 export default HospitalRoute;

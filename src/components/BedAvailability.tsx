@@ -5,55 +5,50 @@ import { FormattedMessage, FormattedDate, FormattedTime } from "react-intl";
 
 const BedAvailability = ({
   iculc,
+  iculcMax,
   icuhc,
+  icuhcMax,
   ecmo,
+  ecmoMax,
   timestamp
 } : BedAvailabilityProps) => (
   <>
     <Table style={ { height: 145 } } striped bordered hover variant="dark">
       <thead>
         <tr>
-          <th>ICULC</th>
-          <th>ICUHC</th>
-          <th>ECMO</th>
-          <th>Updated</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
           <FormattedMessage
             id="iculc"
             defaultMessage="ICULC"
           >
-            {(txt) =>
-              <td> <Badge pill variant="success">{iculc}</Badge></td>
-            }
+            {(txt) => <th>{txt}</th>}
           </FormattedMessage>
           <FormattedMessage
             id="icuhc"
             defaultMessage="ICUHC"
           >
-            {(txt) =>
-              <td><Badge pill variant="success">{iculc}</Badge></td>
-            }
+            {(txt) => <th>{txt}</th>}
           </FormattedMessage>
           <FormattedMessage
             id="ecmo"
             defaultMessage="ECMO"
           >
-            {(txt) =>
-              <td><Badge pill variant="danger">{ecmo}</Badge></td>
-            }
+            {(txt) => <th>{txt}</th>}
           </FormattedMessage>
           <FormattedMessage
-            id="availableBeds"
-            description="available beds"
-            defaultMessage="Available Beds"
+            id="updated"
+            description="updated timed"
+            defaultMessage="Updated"
           >
-            {(availableBeds) =>
-              <td><FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/></td>
-            }
+            {(txt) => <th>{txt}</th>}
           </FormattedMessage>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><Badge pill variant="success">{iculc + "/" + iculcMax}</Badge></td>
+          <td><Badge pill variant="success">{icuhc + "/" + icuhcMax}</Badge></td>
+          <td><Badge pill variant="success">{ecmo + "/" + ecmoMax}</Badge></td>
+          <td><FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/></td>
         </tr>
       </tbody>
     </Table>

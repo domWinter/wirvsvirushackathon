@@ -1,4 +1,4 @@
-import { BedAvailability, Hospital, Repository as RepositoryI } from '../types';
+import { BedAvailability, Hospital, MapData, Repository as RepositoryI } from '../types';
 
 export class Repository implements RepositoryI {
     addHospital(): Promise<{}> {
@@ -34,5 +34,8 @@ export class Repository implements RepositoryI {
             });
         }
         return Promise.reject(new Error('No such hospital'));
+    }
+    getMapData(): Promise<MapData> {
+        return Promise.reject(new Error("Method not implemented."));
     }
 }

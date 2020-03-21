@@ -1,11 +1,19 @@
 const LOCALE = 'de';
 const MESSAGES = {
-  'app.greeting': 'Hallo {name}',
   'address': 'Adresse',
   'availableBeds': 'Verfügbare Betten',
+  'back': 'Zurück',
+  'bedCapacity': 'Bettenbelegung',
   'contact': 'Kontakt',
   'date': 'Datum',
+  'heatMap': 'Heat Map',
+  'information': 'Information',
+  'link': 'Link',
+  'marker': 'Marker',
+  'name': 'Name',
+  'open': 'Öffnen',
   'phone': 'Telefon',
+  'updated': 'Updated',
   'website': 'Website',
 
   'iculc': 'ICULC',
