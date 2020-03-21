@@ -7,8 +7,7 @@ const Hospital = ({
   address: {city, postcode, state, street, streetNumber},
   name,
   phoneNumber,
-  website,
-  beds: {iculc, icuhc, ecmo}
+  website
 } : HospitalProps) => (
   <>
     <h2>{name}</h2>
@@ -54,9 +53,6 @@ const Hospital = ({
         <h3>{availableBeds}:</h3>
       }
     </FormattedMessage>
-    <p>ICULC: {iculc} <br/>
-      ICUHC: {icuhc} <br/>
-      ECMO: {ecmo}</p>
     <Link to='/'>Back</Link>
   </>
 );

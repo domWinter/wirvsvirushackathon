@@ -18,11 +18,6 @@ export type Hospital = {
     phoneNumber: string,
     website: string,
     location: Location,
-    beds: {
-        iculc: number,
-        icuhc: number,
-        ecmo: number
-    }
 };
 
 export interface Repository {

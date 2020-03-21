@@ -15,9 +15,8 @@ const HospitalList = ({
         <div>
             <ul>
                 {hospitals.map(hospital =>
-                    <li><Link to={{
-                        pathname: '/hospital',
-                        search: `${hospital.id}`,
+                    <li key={hospital.id}><Link to={{
+                        pathname: `/hospital/${hospital.id}`,
                         state: hospital
                     }}><HospitalPreview {...hospital}/></Link></li>
                 )}
