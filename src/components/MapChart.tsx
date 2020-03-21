@@ -1,48 +1,27 @@
 import React, { useEffect, useState } from 'react';
-import { ComposableMap, Geographies, Geography, Marker, ZoomableGroup } from 'react-simple-maps';
 import { Client } from '../client/client';
+import { Map, GoogleApiWrapper } from 'google-maps-react';
 
-const geoUrl = 'https://raw.githubusercontent.com/zcreativelabs/react-simple-maps/master/topojson-maps/world-110m.json';
+const mapStyles = {
+    width: '100%',
+    height: '100%'
+}
 
-const MapChart = () => {
+export class MapContainer extends React.Component<any, any> {
+    renter() {
+        return (
+            <Map 
+                google={this.props.google}
+                zoom={10}
+                style={mapStyles}
+                initialCenter={{ lat: 47.444, lng: -122.176}} />
+        );
+    }
+}
 
-    const [markers, setMarkers] = useState([]);
-
-    useEffect(() => {
-        const client = new Client();
-        client.getHospitals().then(hospitals => {
-            setMarkers(markersFromHospitals(hospitals));
-        });
-    });
-
-    return (
-        <ComposableMap>
-            <ZoomableGroup 
-                center={[11.566667, 48.133333]}
-                zoom={200}
-                >
-                <Geographies geography={geoUrl}>
-                    {({ geographies }) => 
-                        geographies
-                        .filter(d => d.properties.REGION_UN === 'Europe')
-                        .map(geo => (
-                            <Geography
-                                key={geo.rsmKey}
-                                geography={geo}
-                                fill='#aaa'
-                                stroke='#000' />
-                        ))
-                    }
-                </Geographies>
-                {markers.map(({ name, coordinates }) => (
-                    <Marker key={name} coordinates={coordinates}>
-                        <circle r={0.02} fill='#a22'/>
-                    </Marker>
-                ))}
-            </ZoomableGroup>
-        </ComposableMap>
-    );
-};
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyCvMhJbAdn-7DIlRDbC9GB9aio0P6fQdVo'
+})(MapContainer);
 
 function markersFromHospitals(hospitals) {
     const markers = hospitals.map(hospital => {
@@ -54,5 +33,3 @@ function markersFromHospitals(hospitals) {
 
     return markers;
 }
-
-export default MapChart;

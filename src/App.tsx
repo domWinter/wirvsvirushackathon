@@ -5,7 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import HospitalRoute from './components/HospitalRoute';
 import HospitalsRoute from './components/HospitalsRoute';
-import MapChart from './components/MapChart';
+import Map from './components/MapChart';
 
 type AppProps = {
   className?: string
@@ -20,7 +20,7 @@ const App = ({ className } : AppProps) => {
             <HospitalRoute />
           </Route>
           <Route path='/map'>
-            <MapChart />
+            <Map />
           </Route>
           <Route path='/'>
             <HospitalsRoute />
