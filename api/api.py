@@ -39,6 +39,13 @@ def getHospitals():
 @app.route('/hospital', methods=['GET'])
 def getHospitalByID():
     requestHospitalID = int(request.args.get('id'))
+    return {'hospitals': mockHospitals}, 200
+
+@app.route('/hospital', methods=['GET'])
+def getHospitalByID():
+    data = request.get_json()
+    requestHospitalID = int(request.args.get('id'))
+    requestHospitalID = data['id']
     hospital = {}
 
     for hospital in mockHospitals:
