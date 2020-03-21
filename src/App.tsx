@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Hospital from './components/Hospital';
+import HospitalList from './components/HospitalList';
 // TODO change to real repository
 import { Repository } from './client/client';
 import {
@@ -17,11 +17,11 @@ type AppProps = {
 const repository : RepositoryI = new Repository();
 
 const App = ({ className } : AppProps) => {
-  const [hospital, setHospital] = useState<HospitalI | undefined>()
+  const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
   useEffect(() => {
-    repository.getHospitalById(1234)
-    .then(setHospital)
-    .catch((error) => console.log("Cannot fetch hospital"));
+    repository.getHospitals()
+    .then(setHospitals)
+    .catch((error) => console.log("Cannot fetch hospitals"));
   }, []);
 
   return (
@@ -37,12 +37,11 @@ const App = ({ className } : AppProps) => {
           <p>{txt}</p>
         }
       </FormattedMessage>
-      {hospital && <p>{JSON.stringify(hospital)}</p>}
+      {hospitals && <HospitalList hospitals={hospitals}/>}
     </div>
   );
 };
 
-      // {hospital && <Hospital {...hospital} />}
 const StyledApp = styled(App)`
   text-align: center;
 `;

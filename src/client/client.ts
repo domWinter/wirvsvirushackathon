@@ -8,7 +8,7 @@ type requestParams = {
 
 const request = ({path, params}: requestParams) => {
   return axios.get(path, {params})
-  .then((response) => response.data)
+  .then((response) => response.data.data)
   .catch((error) => { throw new Error(error) })
 };
 
@@ -22,7 +22,7 @@ export class Repository implements RepositoryI {
     return request({
       path: '/hospital',
       params: {
-        'id': 12345
+        'id': 1
       }
     });
   }
