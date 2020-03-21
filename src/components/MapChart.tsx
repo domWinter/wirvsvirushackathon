@@ -8,19 +8,19 @@ const mapStyles = {
 }
 
 export class MapContainer extends React.Component<any, any> {
-    renter() {
+    render() {
         return (
             <Map 
                 google={this.props.google}
-                zoom={10}
+                zoom={12}
                 style={mapStyles}
-                initialCenter={{ lat: 47.444, lng: -122.176}} />
+                initialCenter={{ lat: 48.133333, lng: 11.566667}} />
         );
     }
 }
 
 export default GoogleApiWrapper({
-    apiKey: 'AIzaSyCvMhJbAdn-7DIlRDbC9GB9aio0P6fQdVo'
+    apiKey: ''
 })(MapContainer);
 
 function markersFromHospitals(hospitals) {
