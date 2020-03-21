@@ -20,6 +20,18 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
     date: { id: 'date', defaultMessage: 'Datum' },
   });
 
+  const theme = {
+    axis: {
+      textColor: '#eee',
+      fontSize: '10px',
+      tickColor: '#eee',
+    },
+    grid: {
+      stroke: '#888',
+      strokeWidth: 1
+    },
+  };
+
   return (
     <div style={{height, width}}>
 
@@ -43,6 +55,7 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
             legendPosition: 'center'
         }}
         dotSize={12}
+        theme={theme}
         useMesh={true}
       />
     </div>

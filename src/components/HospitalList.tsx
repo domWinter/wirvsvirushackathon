@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-
+import { Table, Button } from 'react-bootstrap';
 import { Hospital } from '../types';
 import HospitalPreview from './HospitalPreview';
 
@@ -13,14 +13,33 @@ const HospitalList = ({
 } : HospitalListProps) => {
     return (
         <div>
-            <ul>
+            <Table striped bordered hover variant="dark">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Adresse</th>
+                        <th>Telefon</th>
+                        <th>Website</th>
+                        <th>Info</th>
+                    </tr>
+                </thead>
+                <tbody>
                 {hospitals.map((hospital, i) =>
-                    <li key={i}><Link to={{
-                        pathname: `/hospital/${hospital.id}`,
-                        state: hospital
-                    }}><HospitalPreview {...hospital}/></Link></li>
+                    <tr key={i}>
+                        <HospitalPreview {...hospital}/>
+                        <td><Link to={{
+                                pathname: `/hospital/${hospital.id}`,
+                                state: hospital
+                            }}>
+                            <Button size="sm" variant="info">Info</Button>{' '}
+                            </Link>
+                        </td>
+                    </tr>
+
+                    
                 )}
-            </ul>
+                </tbody>
+            </Table>
         </div>
     );
 };
