@@ -12,6 +12,8 @@ import Client from '../client/client';
 import Hospital from './Hospital';
 import LineChart from "./LineChart";
 
+const MAX_POINTS = 10;
+
 export const HospitalRoute = () => {
   const id: number = parseInt((useParams() as { id: string }).id);
   const hospitalFromState : HospitalI = useLocation().state as HospitalI;
@@ -21,11 +23,14 @@ export const HospitalRoute = () => {
   const intl = useIntl();
 
   const transformBedAvailability = (bedAvailability)  => {
-    const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest}) => ({
-      dIculc: [...dIculc, {x: timestamp, y: iculc}],
-      dIcuhc: [...dIcuhc, {x: timestamp, y: icuhc}],
-      dEcmo: [...dEcmo, {x: timestamp, y: ecmo}]
-    }), {dIculc: [], dIcuhc: [], dEcmo: []});
+    const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest}) => {
+      const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
+      return {
+        dIculc: [...dIculc, {x: xDate, y: iculc}],
+        dIcuhc: [...dIcuhc, {x: xDate, y: icuhc}],
+        dEcmo: [...dEcmo, {x: xDate, y: ecmo}]
+      };
+    }, {dIculc: [], dIcuhc: [], dEcmo: []});
     const messages = defineMessages({
       iculc: { id: 'iculc', defaultMessage: 'ICULC' },
       icuhc: { id: 'icuhc', defaultMessage: 'ICUHC' },
@@ -34,15 +39,15 @@ export const HospitalRoute = () => {
     setBedAvailabilityData([
       {
         id: intl.formatMessage(messages.iculc),
-        data: data.dIculc
+        data: data.dIculc.splice(0, Math.min(MAX_POINTS,data.dIculc.length))
       },
       {
         id: intl.formatMessage(messages.icuhc),
-        data: data.dIcuhc,
+        data: data.dIcuhc.splice(0, Math.min(MAX_POINTS,data.dIcuhc.length)),
       },
       {
         id: intl.formatMessage(messages.ecmo),
-        data: data.dEcmo
+        data: data.dEcmo.splice(0, Math.min(MAX_POINTS,data.dEcmo.length))
       }
     ]);
   }
