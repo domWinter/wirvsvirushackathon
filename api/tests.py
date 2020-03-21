@@ -7,7 +7,6 @@ class TestApiRoutes(unittest.TestCase):
         r = requests.get("http://127.0.0.1:5000/hospitals")
         self.assertEqual(str(r.status_code), '200')
 
-
     def testHospital(self):
         id = 1
         r = requests.get("http://127.0.0.1:5000/hospital" + "?id=" + str(id))
@@ -21,6 +20,10 @@ class TestApiRoutes(unittest.TestCase):
     def testLatestBedavailability(self):
         id = 1
         r = requests.get("http://127.0.0.1:5000/bedavailability/latest" + "?id=" + str(id))
+        self.assertEqual(str(r.status_code), '200')
+
+    def getMapData(self):
+        r = requests.get("http://127.0.0.1:5000/mapdata")
         self.assertEqual(str(r.status_code), '200')
 
 if __name__ == '__main__':

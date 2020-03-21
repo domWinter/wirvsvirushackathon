@@ -73,7 +73,7 @@ def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
 def getMapData(conn):
     cur = conn.cursor()
     try:
-        query =  ""
+        query =  "SELECT hospitals.* , bedTemp.* FROM hospitals INNER JOIN  (SELECT  * , RANK() OVER (PARTITION BY bed1.hospitalID ORDER BY bed1.timestamp DESC ) as rnk FROM bedavailability bed1 ) as bedTemp ON hospitals.id = bedTemp.hospitalID WHERE bedTemp.rnk <2;"
         cur.execute(query)
         joinedDataSQL = cur.fetchall()
         return joinedDataSQL
