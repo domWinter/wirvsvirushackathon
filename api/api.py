@@ -81,8 +81,6 @@ def getHospitalByID():
 def addHospital():
     jsonData = request.get_json()
 
-    print(jsonData)
-
     if 'data' not in jsonData:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
@@ -101,6 +99,8 @@ def addHospital():
                                              hospital['address']['city'])
     except:
         return json.dumps({"data": {'success' : False} }), 500, {'ContentType':'application/json'}
+
+    print(latitude, longitude)
 
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
@@ -129,7 +129,7 @@ def getBedavailability():
     bedavailabilitesSQL = databaseUtils.getAllBedavailabilities(conn, requestHospitalID)
 
     if bedavailabilitesSQL is None:
-        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+        return json.dumps({"data" : []}), 404, {'ContentType':'application/json'}
 
     bedavailabilites = []
 
@@ -154,7 +154,7 @@ def getLatestBedavailability():
     bedavailabilitySQL = databaseUtils.getLatestBedavailability(conn, requestHospitalID)[0]
 
     if bedavailabilitySQL is None:
-        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+        return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
 
     bedavailability = {'id' : int(bedavailabilitySQL[0]), 
                        'hospitalID': int(bedavailabilitySQL[1]),

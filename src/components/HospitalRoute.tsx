@@ -1,5 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
+import { Container, Row, Col, Card } from 'react-bootstrap';
 import { useIntl, defineMessages } from "react-intl";
 
 import {
@@ -73,10 +74,27 @@ export const HospitalRoute = () => {
   
   return (
     <>
-      {hospital && <Hospital {...hospital} />}
-      {bedAvailabilityLatest && <BedAvailability {...bedAvailabilityLatest} />}
-      {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
-     <Link to='/'>Back</Link>
+      <Container>
+       <Row>
+        <Col>
+          {hospital && <Hospital {...hospital} />}
+        </Col>
+        <Col>
+          {bedAvailabilityLatest && <BedAvailability {...bedAvailabilityLatest} />}
+        </Col>
+      </Row>
+      <Row>
+        <Col>
+        
+          <Card className="bg-dark text-white">
+          <Card.Header><h2>Bettenbelegung</h2></Card.Header>
+              {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
+          </Card> 
+          <Link to='/'>Back</Link>
+        </Col>
+      </Row>
+      </Container>
+      
    </>
   );
 };

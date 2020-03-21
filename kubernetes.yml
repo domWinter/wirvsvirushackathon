@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: wirvsvirushackathon.azurecr.io/web:2
+        image: wirvsvirushackathon.azurecr.io/web:5
         ports:
         - containerPort: 5000
 

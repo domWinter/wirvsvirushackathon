@@ -1,5 +1,7 @@
 import React from 'react';
 import { Hospital as HospitalProps } from '../types';
+import { BedAvailability as BedAvailabilityProps } from '../types';
+import { Table, Button } from 'react-bootstrap';
 import { FormattedMessage } from "react-intl";
 
 const Hospital = ({
@@ -7,49 +9,51 @@ const Hospital = ({
   name,
   phoneNumber,
   website
-} : HospitalProps) => (
+  }: HospitalProps) => (
   <>
-    <h2>{name}</h2>
-    <FormattedMessage
-      id="address"
-      description="address"
-      defaultMessage="Address"
-    >
-      {(address) =>
-        <h3>{address}:</h3>
-      }
-    </FormattedMessage>
-    <p>{street} {streetNumber}<br/>
-    {postcode}, {city}<br/>
-    {state}</p>
-
-    <FormattedMessage
-      id="contact"
-      description="contact"
-      defaultMessage="Contact"
-    >
-      {(contact) =>
-        <h3>{contact}:</h3>
-      }
-    </FormattedMessage>
-    <FormattedMessage
-      id="website"
-      description="website"
-      defaultMessage="Website"
-    >
-      {(websiteTxt) =>
-        <p>{websiteTxt}: <a href={website}>{website}</a></p>
-      }
-    </FormattedMessage>
-    <FormattedMessage
-      id="phone"
-      description="Phone number"
-      defaultMessage="Phone number"
-    >
-      {(txt) =>
-        <p>{txt}: {phoneNumber}</p>
-      }
-    </FormattedMessage>
+    <Table style={ { height: 145 } } striped bordered hover variant="dark">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Adresse</th>
+          <th>Website</th>
+          <th>Telefon</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>{name}</td>
+          <FormattedMessage
+            id="address"
+            description="address"
+            defaultMessage="Address"
+          >
+            {(address) =>
+              <td>{street} {streetNumber}<br/>
+              {postcode}, {city}</td>
+            }
+          </FormattedMessage>
+          <FormattedMessage
+            id="website"
+            description="website"
+            defaultMessage="Website"
+          >
+            {(websiteTxt) =>
+              <td><a href={website}><Button size="sm" variant="info">Link</Button>{' '}</a></td>
+            }
+          </FormattedMessage>
+          <FormattedMessage
+            id="phone"
+            description="Phone number"
+            defaultMessage="Phone number"
+          >
+            {(txt) =>
+              <td>{phoneNumber}</td>
+            }
+          </FormattedMessage>
+        </tr>
+      </tbody>
+    </Table>
   </>
 );
 
