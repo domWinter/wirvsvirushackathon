@@ -1,5 +1,6 @@
 import React from 'react'
 import { Hospital as HospitalProps } from '../types'
+import { FormattedMessage } from "react-intl";
 
 const HospitalPreview = ({
     name,
@@ -8,13 +9,29 @@ const HospitalPreview = ({
     website
 } : HospitalProps) => {
     return (
-        <div>
+        <>
             <h3>{name}</h3>
             <p>{street} {streetNumber} <br/>
             {postcode}, {city}</p>
-            <p>Phone: {phoneNumber} <br/>
-            Website: <a href={website}>{website}</a></p>
-        </div>
+            <FormattedMessage
+              id="phone"
+              description="phone"
+              defaultMessage="Phone"
+            >
+              {(phone) =>
+                <p>{phone}: {phoneNumber}</p>
+              }
+            </FormattedMessage>
+            <FormattedMessage
+              id="website"
+              description="website"
+              defaultMessage="Website"
+            >
+            {(websiteTxt) =>
+              <p>{websiteTxt}: <a href={website}>{website}</a></p>
+            }
+            </FormattedMessage>
+        </>
     ); 
 };
 

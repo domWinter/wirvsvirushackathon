@@ -1,4 +1,6 @@
 from geoUtils import getGeoLocation
+from datetime import datetime
+
 
 def getAllHospitals(conn):
     cur = conn.cursor()
@@ -31,14 +33,20 @@ def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, w
     except: 
         return False
     return True
-    
 
-def updateBeds(conn, hospitalID,bedType,amount):
-    sql  = "UPDATE hospitals SET {} = %s WHERE id = %s".format(bedType)
-    val = (amount, hospitalID)
+
+def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
+    if timestamp == "current" :
+        dt = datetime.now()
+        sql  = "INSERT INTO bedavailability (hospitalID,iculc,icuhc,ecmo,timestamp) VALUES (%s,%s,%s,%s,%s)"
+        val = (hospitalID,icuhc,icuhc,ecmo,dt)
+    else:
+        sql  = "INSERT INTO bedavailability (hospitalID,iculc,icuhc,ecmo,timestamp) VALUES (%s,%s,%s,%s,%s)"
+        val = (hospitalID,icuhc,icuhc,ecmo,timestamp)
     try:    
         conn.cursor().execute(sql, val)
         conn.commit()
     except Exception as inst:
         print("Update beds failed")
         print(inst.args)
+
