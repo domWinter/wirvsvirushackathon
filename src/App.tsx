@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, RouteComponentProps, useLocation } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HospitalList from './components/HospitalList';
+import Hospital from './components/Hospital';
 // TODO change to real repository
 import { Repository } from './client/client';
 import {
@@ -37,10 +40,24 @@ const App = ({ className } : AppProps) => {
           <p>{txt}</p>
         }
       </FormattedMessage>
-      {hospitals && <HospitalList hospitals={hospitals}/>}
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            {hospitals && <HospitalList hospitals={hospitals}/>}
+          </Route>
+          <Route path='/hospital'>
+            //@ts-ignore
+            <HospitalRoute />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };
+
+function HospitalRoute({ location } : RouteComponentProps<{}, {}, HospitalI>) {
+  return <Hospital {...location.state} />
+}
 
 const StyledApp = styled(App)`
   text-align: center;

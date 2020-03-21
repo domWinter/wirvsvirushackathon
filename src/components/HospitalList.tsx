@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { Hospital } from '../types';
 import HospitalPreview from './HospitalPreview';
@@ -13,13 +13,15 @@ const HospitalList = ({
 } : HospitalListProps) => {
     return (
         <div>
-            <Router>
-                <ul>
-                    {hospitals.map(hospital =>
-                        <li><Link to={`/hospitals/${hospital.id}`}><HospitalPreview {...hospital}/></Link></li>
-                    )}
-                </ul>
-            </Router>
+            <ul>
+                {hospitals.map(hospital =>
+                    <li><Link to={{
+                        pathname: '/hospital',
+                        search: `${hospital.id}`,
+                        state: hospital
+                    }}><HospitalPreview {...hospital}/></Link></li>
+                )}
+            </ul>
         </div>
     );
 };
