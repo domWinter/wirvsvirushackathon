@@ -3,8 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
+import MainRoute from './components/MainRoute';
 import HospitalRoute from './components/HospitalRoute';
-import HospitalsRoute from './components/HospitalsRoute';
 import MapRoute from './components/MapRoute';
 
 type AppProps = {
@@ -23,7 +23,7 @@ const App = ({ className } : AppProps) => {
             <MapRoute />
           </Route>
           <Route path='/'>
-            <HospitalsRoute />
+            <MainRoute />
           </Route>
         </Switch>
       </Router>
