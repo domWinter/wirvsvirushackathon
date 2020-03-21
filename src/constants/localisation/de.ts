@@ -4,6 +4,7 @@ const MESSAGES = {
   'address': 'Adresse',
   'availableBeds': 'Verfügbare Betten',
   'contact': 'Kontakt',
+  'phone': 'Telefon',
   'website': 'Website'
 };
 

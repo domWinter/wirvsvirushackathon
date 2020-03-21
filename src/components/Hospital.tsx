@@ -9,7 +9,7 @@ const Hospital = ({
   website,
   beds: {iculc, icuhc, ecmo}
 } : HospitalProps) => (
-  <div>
+  <>
     <h2>{name}</h2>
     <FormattedMessage
       id="address"
@@ -56,7 +56,7 @@ const Hospital = ({
     <p>ICULC: {iculc} <br/>
       ICUHC: {icuhc} <br/>
       ECMO: {ecmo}</p>
-  </div>
+  </>
 );
 
 export default Hospital;
