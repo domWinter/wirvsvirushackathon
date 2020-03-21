@@ -3,31 +3,37 @@ import { useLocation, useParams } from 'react-router-dom';
 
 import {
   Hospital as HospitalI,
+  BedAvailability
 } from '../types';
 
 import Client from '../client/client';
 import Hospital from './Hospital';
 
 export const HospitalRoute = () => {
-  const hospitalId: number = parseInt((useParams() as { hospitalId: string }).hospitalId);
+  const id: number = parseInt((useParams() as { id: string }).id);
   const hospitalFromState : HospitalI = useLocation().state as HospitalI;
   const [hospital, setHospital] = useState<HospitalI>();
+  const [bedAvailability, setBedAvailability] = useState<BedAvailability>();
 
   useEffect(() => {
+    const client = new Client();
     if(hospitalFromState) {
       setHospital(hospitalFromState);
     }
     else {
-      const client = new Client();
-      client.getHospitalById(hospitalId)
+      client.getHospitalById(id)
       .then(setHospital)
-      .catch((error) => console.log('Invalid ID'));
+      .catch(console.error);
     }
-  }, [hospitalId, hospitalFromState]);
+    client.getBedAvailabilityLatest(id)
+    .then(setBedAvailability)
+    .catch(console.error);
+  }, [id, hospitalFromState]);
   
   return (
     <>
       {hospital && <Hospital {...hospital} />}
+      {bedAvailability && <p>{JSON.stringify(bedAvailability)}</p>}
     </>
   );
 };

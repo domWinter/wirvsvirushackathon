@@ -12,7 +12,7 @@ export const HospitalsRoute = () => {
     const client = new Client();
     client.getHospitals()
     .then(setHospitals)
-    .catch((error) => console.log("Cannot fetch hospitals"));
+    .catch((error) => console.error(error));
   }, []);
   
   return (

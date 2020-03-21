@@ -15,7 +15,7 @@ const App = ({ className } : AppProps) => {
     <div className={className}>
       <Router>
         <Switch>
-          <Route path='/hospital/:hospitalId'>
+          <Route path='/hospital/:id'>
             <HospitalRoute />
           </Route>
           <Route path='/'>
