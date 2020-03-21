@@ -1,4 +1,4 @@
-import { Hospital, Repository as RepositoryI } from '../types';
+import { BedAvailability, Hospital, Repository as RepositoryI } from '../types';
 import axios from 'axios';
 
 type getParams = {
@@ -31,6 +31,20 @@ export class Client implements RepositoryI {
     });
   }
 
+  getBedAvailability(id : number): Promise<BedAvailability[]> {
+    return get({
+      path: '/bedAvailability',
+      params: { id }
+    });
+  }
+
+  getBedAvailabilityLatest(id : number): Promise<BedAvailability> {
+    return get({
+      path: '/bedAvailability/latest',
+      params: { id }
+    });
+  }
+
   getHospitals(): Promise<Hospital[]> {
     return get({
       path: '/hospitals'
@@ -40,9 +54,7 @@ export class Client implements RepositoryI {
   getHospitalById(id: number): Promise<Hospital> {
     return get({
       path: '/hospital',
-      params: {
-        'id': id
-      }
+      params: { id }
     });
   }
 }

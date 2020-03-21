@@ -1,32 +1,16 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import styled from 'styled-components';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
-import styled from 'styled-components';
-
-import {
-  Hospital as HospitalI,
-  Repository as RepositoryI
-} from './types';
-
-import HospitalList from './components/HospitalList';
 import HospitalRoute from './components/HospitalRoute';
-import Client from './client/client';
+import HospitalsRoute from './components/HospitalsRoute';
 
 type AppProps = {
   className?: string
 }
 
 const App = ({ className } : AppProps) => {
-  const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
-  useEffect(() => {
-    const client : RepositoryI = new Client();
-    client.getHospitals()
-    .then(setHospitals)
-    .catch((error) => console.log("Cannot fetch hospitals"));
-  }, []);
-
   return (
     <div className={className}>
       <Router>
@@ -35,7 +19,7 @@ const App = ({ className } : AppProps) => {
             <HospitalRoute />
           </Route>
           <Route path='/'>
-            {hospitals && <HospitalList hospitals={hospitals}/>}
+            <HospitalsRoute />
           </Route>
         </Switch>
       </Router>
