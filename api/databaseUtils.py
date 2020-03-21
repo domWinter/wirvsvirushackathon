@@ -21,10 +21,10 @@ def getHospitalbyID(conn, hospitalID):
     except:
         return None
 
-def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude=0,longitude=0,iculc=0,icuhc=0,ecmo=0):
+def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude,longitude):
     cur = conn.cursor()
-    sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, iculc, icuhc, ecmo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-    val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, iculc, icuhc, ecmo)
+    sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+    val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude)
     try:
         cur.execute(sql, val)
         conn.commit()
