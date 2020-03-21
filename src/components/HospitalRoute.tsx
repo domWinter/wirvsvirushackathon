@@ -24,7 +24,8 @@ export const HospitalRoute = () => {
 
   const transformBedAvailability = (bedAvailability)  => {
     const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest}) => {
-      const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
+      // const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
+      const xDate = intl.formatDate(timestamp);
       return {
         dIculc: [...dIculc, {x: xDate, y: iculc}],
         dIcuhc: [...dIcuhc, {x: xDate, y: icuhc}],
