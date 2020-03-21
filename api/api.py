@@ -140,9 +140,9 @@ def getBedavailability():
                                      'iculc' : int(row[2]),
                                      'icuhc' : int(row[3]),
                                      'ecmo': int(row[4]),
-                                     'iculcmax' : int(row[5]),
-                                     'icuhcmax' : int(row[6]),
-                                     'ecmomax': int(row[7]),
+                                     'iculcMax' : int(row[5]),
+                                     'icuhcMax' : int(row[6]),
+                                     'ecmoMax': int(row[7]),
                                      'timestamp' : str(row[8])
                                     }) 
     except:
@@ -164,9 +164,9 @@ def getLatestBedavailability():
                        'iculc' : int(bedavailabilitySQL[2]),
                        'icuhc' : int(bedavailabilitySQL[3]),
                        'ecmo': int(bedavailabilitySQL[4]),
-                       'iculcmax' : int(bedavailabilitySQL[5]),
-                       'icuhcmax' : int(bedavailabilitySQL[6]),
-                       'ecmomax': int(bedavailabilitySQL[7]),
+                       'iculcMax' : int(bedavailabilitySQL[5]),
+                       'icuhcMax' : int(bedavailabilitySQL[6]),
+                       'ecmoMax': int(bedavailabilitySQL[7]),
                        'timestamp' : str(bedavailabilitySQL[8])
                       }
 
