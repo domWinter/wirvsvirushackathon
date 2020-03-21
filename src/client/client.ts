@@ -1,23 +1,29 @@
 import { Hospital, Repository as RepositoryI } from '../types';
 import axios from 'axios';
 
-const request = ({path, params, fail}) => {
+type requestParams = {
+  path: string,
+  params?: object
+}
+
+const request = ({path, params}: requestParams) => {
   return axios.get(path, {params})
-  .then((response) => response)
-  .catch((error) => fail(error))
+  .then((response) => response.data)
+  .catch((error) => { throw new Error(error) })
 };
 
 export class Repository implements RepositoryI {
   getHospitals(): Promise<Hospital[]> {
-     return Promise.reject(new Error("Method not implemented."));
+    return request({
+      path: '/hospitals'
+    });
   }
   getHospitalById(id: number): Promise<Hospital> {
     return request({
-    path: '/hospitals',
-    params: {
-      'ID': 12345
-    },
-    fail: (e) => console.log(e)
-    })
+      path: '/hospital',
+      params: {
+        'id': 12345
+      }
+    });
   }
 }
