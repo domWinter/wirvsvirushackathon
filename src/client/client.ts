@@ -1,4 +1,4 @@
-import { Hospital, BedList, Repository as RepositoryI } from '../types';
+import { Hospital, Repository as RepositoryI } from '../types';
 import axios from 'axios';
 
 const request = ({path, params, fail}) => {
@@ -19,8 +19,5 @@ export class Repository implements RepositoryI {
     },
     fail: (e) => console.log(e)
     })
-  }
-  getBedListById(id: number): Promise<BedList> {
-    return Promise.reject(new Error('No such bed list'));
   }
 }

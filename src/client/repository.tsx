@@ -1,4 +1,4 @@
-import { Hospital, BedList, Repository as RepositoryI } from '../types';
+import { Hospital, Repository as RepositoryI } from '../types';
 
 export class Repository implements RepositoryI {
     getHospitals(): Promise<Hospital[]> {
@@ -22,21 +22,13 @@ export class Repository implements RepositoryI {
                     longitude: 15.1234,
                     latitude: 27.2713
                 },
-                bedListId:1234
+                beds: {
+                    iculc: 50,
+                    icuhc: 27,
+                    ecmo: 10
+                }
             });
         }
         return Promise.reject(new Error('No such hospital'));
-    }
-    getBedListById(id: number): Promise<BedList> {
-        if(id === 27) {
-            return Promise.resolve({
-                id: 27,
-                beds: [
-                    { id: 1, ventilator: false, intensive: false, free: true },
-                    { id: 2, ventilator: true, intensive: true, free: false }
-                ]
-            });
-        }
-        return Promise.reject(new Error('No such bed list'));
     }
 }
