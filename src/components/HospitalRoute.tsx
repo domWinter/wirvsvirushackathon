@@ -87,7 +87,6 @@ export const HospitalRoute = () => {
       </Row>
       <Row>
         <Col>
-        
           <Card className="bg-dark text-white">
           <Card.Header><h2>{intl.formatMessage(messages.bedCapacity)}</h2></Card.Header>
             {bedAvailabilityData && JSON.stringify(bedAvailabilityData)}

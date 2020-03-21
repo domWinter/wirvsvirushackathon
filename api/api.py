@@ -135,12 +135,15 @@ def getBedavailability():
 
     try:
         for row in bedavailabilitesSQL:
-            bedavailabilites.append({'id' : int(row[0]), 
+            bedavailabilites.append({'id' : int(row[0]),
                                      'hospitalID': int(row[1]),
-                                     'iculc' : int(row[2]), 
-                                     'icuhc' : int(row[3]), 
-                                     'ecmo': int(row[4]), 
-                                     'timestamp' : str(row[5])
+                                     'iculc' : int(row[2]),
+                                     'icuhc' : int(row[3]),
+                                     'ecmo': int(row[4]),
+                                     'iculcmax' : int(row[5]),
+                                     'icuhcmax' : int(row[6]),
+                                     'ecmomax': int(row[7]),
+                                     'timestamp' : str(row[8])
                                     }) 
     except:
         return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
@@ -156,12 +159,26 @@ def getLatestBedavailability():
     if bedavailabilitySQL is None:
         return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
 
-    bedavailability = {'id' : int(bedavailabilitySQL[0]), 
+    bedavailability = {'id' : int(bedavailabilitySQL[0]),
                        'hospitalID': int(bedavailabilitySQL[1]),
-                       'iculc' : int(bedavailabilitySQL[2]), 
-                       'icuhc' : int(bedavailabilitySQL[3]), 
-                       'ecmo': int(bedavailabilitySQL[4]), 
-                       'timestamp' : str(bedavailabilitySQL[5])
+                       'iculc' : int(bedavailabilitySQL[2]),
+                       'icuhc' : int(bedavailabilitySQL[3]),
+                       'ecmo': int(bedavailabilitySQL[4]),
+                       'iculcmax' : int(bedavailabilitySQL[5]),
+                       'icuhcmax' : int(bedavailabilitySQL[6]),
+                       'ecmomax': int(bedavailabilitySQL[7]),
+                       'timestamp' : str(bedavailabilitySQL[8])
                       }
 
     return json.dumps({"data" : bedavailability}), 200, {'ContentType':'application/json'}
+
+
+@app.route('/mapdata', methods=['GET'])
+def getmapdata():
+
+    joinedDataSQL = databaseUtils.getMapData(conn)
+
+    if joinedDataSQL is None:
+        return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
+
+    return json.dumps({"data" : joinedDataSQL}), 200, {'ContentType':'application/json'}
