@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+
 import { Hospital } from '../types';
 import HospitalPreview from './HospitalPreview';
 
@@ -12,7 +14,13 @@ const HospitalList = ({
     return (
         <div>
             <ul>
-                {hospitals.map(hospital => <li><HospitalPreview {...hospital}/></li>)}
+                {hospitals.map((hospital,i) =>
+                    <li key={i}><Link to={{
+                        pathname: '/hospital',
+                        search: `${hospital.id}`,
+                        state: hospital
+                    }}><HospitalPreview {...hospital}/></Link></li>
+                )}
             </ul>
         </div>
     );

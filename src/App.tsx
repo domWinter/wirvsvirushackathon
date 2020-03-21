@@ -1,46 +1,52 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Route, Switch, useLocation } from 'react-router-dom';
+
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HospitalList from './components/HospitalList';
-// TODO change to real repository
-import { Repository } from './client/client';
+import Hospital from './components/Hospital';
+import styled from 'styled-components';
+
 import {
   Hospital as HospitalI,
   Repository as RepositoryI
 } from './types';
-import styled from 'styled-components';
-import { FormattedMessage } from "react-intl";
+
+import HospitalList from './components/HospitalList';
+import Client from './client/client';
 
 type AppProps = {
   className?: string
 }
 
-const repository : RepositoryI = new Repository();
+const client : RepositoryI = new Client();
 
 const App = ({ className } : AppProps) => {
   const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
   useEffect(() => {
-    repository.getHospitals()
+    client.getHospitals()
     .then(setHospitals)
     .catch((error) => console.log("Cannot fetch hospitals"));
   }, []);
 
   return (
     <div className={className}>
-      <FormattedMessage
-        id="app.greeting"
-        description="Greeting to welcome the user to the app"
-        defaultMessage="Hello, {name}!"
-        values={{
-          name: 'Alex',
-        }}>
-        {(txt) =>
-          <p>{txt}</p>
-        }
-      </FormattedMessage>
-      {hospitals && <HospitalList hospitals={hospitals}/>}
+      <Router>
+        <Switch>
+          <Route exact path='/'>
+            {hospitals && <HospitalList hospitals={hospitals}/>}
+          </Route>
+          <Route path='/hospital'>
+            <HospitalRoute />
+          </Route>
+        </Switch>
+      </Router>
     </div>
   );
 };
+
+function HospitalRoute() {
+  //@ts-ignore
+  return <Hospital {...useLocation().state} />
+}
 
 const StyledApp = styled(App)`
   text-align: center;

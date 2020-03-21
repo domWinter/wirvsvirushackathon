@@ -1,8 +1,3 @@
-export interface Repository {
-    getHospitals() : Promise<Hospital[]>;
-    getHospitalById(id: number) : Promise<Hospital>;
-}
-
 export type Address = {
     state: string,
     city: string,
@@ -29,3 +24,9 @@ export type Hospital = {
         ecmo: number
     }
 };
+
+export interface Repository {
+    addHospital(hospital : Partial<Hospital>) : Promise<{}>;
+    getHospitals() : Promise<Hospital[]>;
+    getHospitalById(id: number) : Promise<Hospital>;
+}
