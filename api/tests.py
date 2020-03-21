@@ -34,4 +34,4 @@ def testHospital(id):
     print(r.text)
 
 
-testHospitals()
+testHospital(1)

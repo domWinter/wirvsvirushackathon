@@ -105,7 +105,17 @@ def addHospital():
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
-    success = databaseUtils.addHospital(conn, hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude)
+    success = databaseUtils.addHospital(conn, 
+                                        hospital['name'],
+                                        hospital['address']['state'],
+                                        hospital['address']['city'],
+                                        hospital['address']['postcode'],
+                                        hospital['address']['street'],
+                                        hospital['address']['streetNumber'],
+                                        hospital['phoneNumber'], 
+                                        hospital['website'], 
+                                        latitude, 
+                                        longitude)
     if not success:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
