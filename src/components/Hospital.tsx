@@ -5,17 +5,25 @@ const Hospital = ({
   address: {city, postcode, state, street, streetNumber},
   name,
   phoneNumber,
-  website
+  website,
+  beds: {iculc, icuhc, ecmo}
 } : HospitalProps) => (
   <div>
     <h2>{name}</h2>
+
     <h3>Address:</h3>
     <p>{street} {streetNumber}<br/>
     {postcode}, {city}<br/>
     {state}</p>
+
     <h3>Contact:</h3>
     <p>Website: {website}<br/>
     Phone Number: {phoneNumber}</p>
+
+    <h3>Available Beds:</h3>
+    <p>ICULC: {iculc} <br/>
+      ICUHC: {icuhc} <br/>
+      ECMO: {ecmo}</p>
   </div>
 );
 
