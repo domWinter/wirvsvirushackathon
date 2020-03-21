@@ -32,6 +32,8 @@ export const Map = ({heatMap, markers} : MapProps) => {
     iculc: { id: 'iculc', defaultMessage: 'ICULC' },
     icuhc: { id: 'iculc', defaultMessage: 'ICUHC' }
   });
+  console.log(heatMap);
+  console.log(markers);
 
   return (
     <OpenMap
@@ -55,7 +57,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
               intensityExtractor={m => m.iculcIntensity}
-              max={1.0}
+              max={1}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
@@ -68,7 +70,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
               intensityExtractor={m => m.icuhcIntensity}
-              max={1.0}
+              max={1}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
@@ -81,14 +83,14 @@ export const Map = ({heatMap, markers} : MapProps) => {
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
               intensityExtractor={m => m.ecmoIntensity}
-              max={1.0}
+              max={1}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
         <LayersControl.Overlay name={intl.formatMessage(messages.marker)} checked>
           <FeatureGroup color="purple">
             {markers.map(({longitude,latitude,name,timestamp},i) => 
-              <Marker key={i} position={[longitude,latitude]} >
+              <Marker key={i} position={[latitude,longitude]} >
                 <Popup>
                   <span>{name}</span>
                 </Popup>

@@ -28,9 +28,9 @@ export const MapRoute = () => {
           {
             longitude,
             latitude,
-            iculcIntensity: iculc*1.0/iculcMax,
-            icuhcIntensity: icuhc*1.0/icuhcMax,
-            ecmoIntensity: ecmo*1.0/ecmoMax
+            iculcIntensity: (iculc*1.0)/iculcMax,
+            icuhcIntensity: (icuhc*1.0)/icuhcMax,
+            ecmoIntensity: (ecmo*1.0)/ecmoMax
           }
         ]
       };
