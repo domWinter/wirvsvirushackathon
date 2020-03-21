@@ -22,13 +22,14 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
 
   return (
     <div style={{height, width}}>
+
       <ResponsiveLine
           data={data}
-          margin={{ top: 50, right: 50, bottom: 50, left: 100 }}
+          margin={{ top: 40, right: 40, bottom: 40, left: 100 }}
           axisBottom={{
             orient: 'bottom',
             tickSize: 5,
-            tickPadding: 5,
+            tickPadding: 16,
             legend: intl.formatMessage(messages.date),
             legendOffset: 36,
             legendPosition: 'center'
@@ -36,12 +37,13 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
         axisLeft={{
             orient: 'left',
             tickSize: 5,
-            tickPadding: 5,
+            tickPadding: 16,
             legend: 'count',
             legendOffset: -40,
             legendPosition: 'center'
         }}
         dotSize={12}
+        useMesh={true}
       />
     </div>
   );
