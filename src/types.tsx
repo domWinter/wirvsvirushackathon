@@ -1,3 +1,8 @@
+export interface Repository {
+    getHospitals() : Promise<Hospital[]>;
+    getHospitalById(id: number) : Promise<Hospital>;
+}
+
 export type Address = {
     state: string,
     city: string,
@@ -11,18 +16,6 @@ export type Location = {
     latitude: number
 };
 
-export type Bed = {
-    id: number,
-    ventilator: boolean,
-    intensive: boolean,
-    free: boolean
-}
-
-export type BedList = {
-    id: number,
-    beds: Bed[]
-};
-
 export type Hospital = {
     id: number,
     name: string,
@@ -30,5 +23,9 @@ export type Hospital = {
     phoneNumber: string,
     website: string,
     location: Location,
-    bedListId: number
+    beds: {
+        iculc: number,
+        icuhc: number,
+        ecmo: number
+    }
 };
