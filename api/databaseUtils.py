@@ -1,4 +1,6 @@
 from geoUtils import getGeoLocation
+from datetime import datetime
+
 
 def getAllHospitals(conn):
     cur = conn.cursor()
@@ -21,7 +23,7 @@ def getHospitalbyID(conn, hospitalID):
     except:
         return None
 
-def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude,longitude):
+def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber,website,latitude,longitude):
     cur = conn.cursor()
     sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude)
@@ -31,14 +33,39 @@ def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, w
     except: 
         return False
     return True
-    
 
-def updateBeds(conn, hospitalID,bedType,amount):
-    sql  = "UPDATE hospitals SET {} = %s WHERE id = %s".format(bedType)
-    val = (amount, hospitalID)
+def getAllBedavailabilities(conn, hospitalID):
+    cur = conn.cursor()
+    sql = "SELECT * FROM bedavailability WHERE hospitalID = %s ORDER BY timestamp desc"
+    try:
+        cur.execute(sql, hospitalID)
+        bedavailabilitesSQL = cur.fetchall()
+        return bedavailabilitesSQL
+    except: 
+        return None
+
+def getLatestBedavailability(conn, hospitalID):
+    cur = conn.cursor()
+    sql = "SELECT * FROM bedavailability WHERE hospitalID = %s ORDER BY timestamp desc LIMIT 1"
+    try:
+        cur.execute(sql, hospitalID)
+        bedavailabilitesSQL = cur.fetchall()
+        return bedavailabilitesSQL
+    except: 
+        return None
+
+def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
+    if timestamp == "current" :
+        dt = datetime.now()
+        sql  = "INSERT INTO bedavailability (hospitalID,iculc,icuhc,ecmo,timestamp) VALUES (%s,%s,%s,%s,%s)"
+        val = (hospitalID,icuhc,icuhc,ecmo,dt)
+    else:
+        sql  = "INSERT INTO bedavailability (hospitalID,iculc,icuhc,ecmo,timestamp) VALUES (%s,%s,%s,%s,%s)"
+        val = (hospitalID,icuhc,icuhc,ecmo,timestamp)
     try:    
         conn.cursor().execute(sql, val)
         conn.commit()
     except Exception as inst:
         print("Update beds failed")
         print(inst.args)
+

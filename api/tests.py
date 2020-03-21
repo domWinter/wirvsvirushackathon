@@ -33,5 +33,15 @@ def testHospital(id):
     print(r.status_code, r.reason)
     print(r.text)
 
+def testBedavailability(id):
+    r = requests.get("http://127.0.0.1:5000/bedavailability" + "?id=" + str(id))
+    print(r.status_code, r.reason)
+    print(r.text)
 
-testHospitals()
+def testLatestBedavailability(id):
+    r = requests.get("http://127.0.0.1:5000/bedavailability/latest" + "?id=" + str(id))
+    print(r.status_code, r.reason)
+    print(r.text)
+
+
+testLatestBedavailability(1)
