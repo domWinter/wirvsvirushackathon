@@ -1,6 +1,9 @@
 import { Hospital, Repository as RepositoryI } from '../types';
 
 export class Repository implements RepositoryI {
+    addHospital(): Promise<{}> {
+        return Promise.reject(new Error("Method not implemented."));
+    }
     getHospitals(): Promise<Hospital[]> {
         return Promise.reject(new Error("Method not implemented."));
     }

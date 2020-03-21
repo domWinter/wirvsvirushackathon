@@ -9,19 +9,19 @@ import {
 
 import HospitalList from './components/HospitalList';
 import HospitalForm from './components/HospitalForm';
-import { Repository } from './client/client';
+import Client from './client/client';
 import { FormattedMessage } from "react-intl";
 
 type AppProps = {
   className?: string
 }
 
-const repository : RepositoryI = new Repository();
+const client : RepositoryI = new Client();
 
 const App = ({ className } : AppProps) => {
   const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
   useEffect(() => {
-    repository.getHospitals()
+    client.getHospitals()
     .then(setHospitals)
     .catch((error) => console.log("Cannot fetch hospitals"));
   }, []);

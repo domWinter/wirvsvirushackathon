@@ -8,6 +8,7 @@ import {
 } from 'formik';
 
 import { Hospital } from '../types';
+import Client from '../client/client';
 
 export const HospitalForm = () => {
   const initialValues : Partial<Hospital> = {
@@ -23,11 +24,11 @@ export const HospitalForm = () => {
         const errors : FormikErrors<{}> = {};
         return errors;
       }}
-      onSubmit={(values, { setSubmitting }) => {
-        setTimeout(() => {
-          alert(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 400);
+      onSubmit={(hospital, { setSubmitting }) => {
+        const client  = new Client();
+        client.addHospital(hospital)
+        .catch((error) => console.log("Cannot submit hospital"))
+        .then(() => setSubmitting(false));
       }}
     >
       {({ isSubmitting }) => (
