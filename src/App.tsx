@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import HospitalList from './components/HospitalList';
-// TODO change to real repository
-import { Repository } from './client/client';
+import styled from 'styled-components';
+
 import {
   Hospital as HospitalI,
   Repository as RepositoryI
 } from './types';
-import styled from 'styled-components';
+
+import HospitalList from './components/HospitalList';
+import HospitalForm from './components/HospitalForm';
+import { Repository } from './client/client';
 import { FormattedMessage } from "react-intl";
 
 type AppProps = {
@@ -26,6 +28,7 @@ const App = ({ className } : AppProps) => {
 
   return (
     <div className={className}>
+      <HospitalForm />
       <FormattedMessage
         id="app.greeting"
         description="Greeting to welcome the user to the app"
