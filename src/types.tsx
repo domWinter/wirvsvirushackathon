@@ -6,6 +6,15 @@ export type Address = {
     streetNumber: number
 };
 
+export type BedAvailability = {
+  id: number,
+  hospitalID: number,
+  iculc: number,
+  icuhc: number,
+  ecmo: number,
+  timestamp: string
+}
+
 export type Location = {
     longitude: number,
     latitude: number
@@ -18,15 +27,12 @@ export type Hospital = {
     phoneNumber: string,
     website: string,
     location: Location,
-    beds: {
-        iculc: number,
-        icuhc: number,
-        ecmo: number
-    }
 };
 
 export interface Repository {
     addHospital(hospital : Partial<Hospital>) : Promise<{}>;
+    getBedAvailabilityLatest(id: number) : Promise<BedAvailability>;
+    getBedAvailability(id: number) : Promise<BedAvailability[]>;
     getHospitals() : Promise<Hospital[]>;
     getHospitalById(id: number) : Promise<Hospital>;
 }

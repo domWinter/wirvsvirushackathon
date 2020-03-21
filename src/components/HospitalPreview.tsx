@@ -28,7 +28,7 @@ const HospitalPreview = ({
               defaultMessage="Website"
             >
             {(websiteTxt) =>
-              <p>{websiteTxt}: <a href={website}>{website}</a></p>
+              <p>{websiteTxt}: {website}</p>
             }
             </FormattedMessage>
         </>
