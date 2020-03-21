@@ -17,3 +17,5 @@ const HospitalList = ({
         </div>
     );
 };
+
+export default HospitalList;

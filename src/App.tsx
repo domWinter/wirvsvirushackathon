@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Hospital from './components/Hospital';
+import HospitalList from './components/HospitalList';
 import HospitalPreview from './components/HospitalPreview';
 // TODO change to real repository
 import { Repository } from './client/client';
@@ -43,9 +44,7 @@ const App = ({ className } : AppProps) => {
         }
       </FormattedMessage>
       {hospital && <Hospital {...hospital}/>}
-      {hospitals && hospitals.map((hospital, i) =>
-        <Hospital {...hospital}/>
-      )}
+      {hospitals && <HospitalList hospitals={hospitals}/>}
     </div>
   );
 };
