@@ -69,3 +69,14 @@ def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
         print("Update beds failed")
         print(inst.args)
 
+
+def getMapData(conn):
+    cur = conn.cursor()
+    try:
+        query =  ""
+        cur.execute(query)
+        joinedDataSQL = cur.fetchall()
+        return joinedDataSQL
+    except:
+        return None
+

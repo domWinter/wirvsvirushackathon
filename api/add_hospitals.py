@@ -36,8 +36,6 @@ def testHospitalAdd():
                     'website' : 'https://www.rotkreuzklinikum-muenchen.de/'
                     }
 
-        
-
         r = requests.post("http://127.0.0.1:5000/hospital/add", json={'data': hospital4})
         print(r.status_code, r.reason)
 

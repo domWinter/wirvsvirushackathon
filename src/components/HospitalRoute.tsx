@@ -85,7 +85,6 @@ export const HospitalRoute = () => {
       </Row>
       <Row>
         <Col>
-        
           <Card className="bg-dark text-white">
           <Card.Header><h2>Bettenbelegung</h2></Card.Header>
               {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
