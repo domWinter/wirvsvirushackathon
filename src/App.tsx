@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import HospitalList from './components/HospitalList';
+// TODO change to real repository
 import { Repository } from './client/client';
 import {
   Hospital as HospitalI,
