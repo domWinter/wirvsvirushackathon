@@ -15,8 +15,8 @@ try:
                             host = "postgres-wirvsvirushackathon.postgres.database.azure.com", 
                             port = "5432")
 except:
-    print("I am unable to connect to the database") 
-    os._exit
+    print("Unable to connect to the database") 
+    os._exit(0)
 
 cur = conn.cursor()
 
@@ -94,6 +94,8 @@ def getHospitalByID():
 def addHospital():
     jsonData = request.get_json()
 
+    print(jsonData)
+
     if 'data' not in jsonData:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
@@ -102,8 +104,10 @@ def addHospital():
     if not all(k in hospital for k in ("name","address","phoneNumber","website","beds")):
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
+
     if not all(k in hospital['address'] for k in ("state","city","postcode","street","streetNumber")):
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
+
 
     if not all(k in hospital['beds'] for k in ("iculc","icuhc","ecmo")):
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
@@ -113,11 +117,14 @@ def addHospital():
                                              hospital['address']['streetNumber'], 
                                              hospital['address']['city'])
     except:
+        return json.dumps({"data": {'success' : False} }), 500, {'ContentType':'application/json'}
+
+    if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
     try:
         sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude, inculc, incuh, ecmo) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-        val = (hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude, hospital['beds']['iculc'], hospital['beds']['icuhv'], hospital['beds']['ecmo'])
+        val = (hospital['name'], hospital['address']['state'], hospital['address']['city'], hospital['address']['postcode'], hospital['address']['street'], hospital['address']['streetNumber'], hospital['phoneNumber'], hospital['website'], latitude, longitude, hospital['beds']['iculc'], hospital['beds']['icuhc'], hospital['beds']['ecmo'])
     except:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
