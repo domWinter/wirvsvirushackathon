@@ -50,7 +50,6 @@ const App = ({ className } : AppProps) => {
             {hospitals && <HospitalList hospitals={hospitals}/>}
           </Route>
           <Route path='/hospital'>
-            //@ts-ignore
             <HospitalRoute />
           </Route>
         </Switch>
@@ -59,8 +58,9 @@ const App = ({ className } : AppProps) => {
   );
 };
 
-function HospitalRoute({ location } : RouteComponentProps<{}, {}, HospitalI>) {
-  return <Hospital {...location.state} />
+function HospitalRoute() {
+  //@ts-ignore
+  return <Hospital {...useLocation().state} />
 }
 
 const StyledApp = styled(App)`

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { Hospital as HospitalProps } from '../types';
 import { FormattedMessage } from "react-intl";
 
@@ -56,6 +57,7 @@ const Hospital = ({
     <p>ICULC: {iculc} <br/>
       ICUHC: {icuhc} <br/>
       ECMO: {ecmo}</p>
+    <Link to='/'>Back</Link>
   </>
 );
 
