@@ -2,6 +2,7 @@ import psycopg2
 import os
 import json
 from flask import Flask, request, jsonify
+from geoUtils import getGeoLocation
 
 app = Flask(__name__)
 
@@ -15,15 +16,19 @@ try:
                             port = "5432")
 except:
     print("I am unable to connect to the database") 
+    os._exit
 
 cur = conn.cursor()
 
 
 @app.route('/hospitals', methods=['GET'])
 def getHospitals():
-    query =  "SELECT * FROM hospitals;"
-    cur.execute(query)
-    hospitalsSQL = cur.fetchall()
+    try:
+        query =  "SELECT * FROM hospitals;"
+        cur.execute(query)
+        hospitalsSQL = cur.fetchall()
+    except:
+        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
 
     hospitals = []
 
@@ -55,9 +60,13 @@ def getHospitals():
 @app.route('/hospital', methods=['GET'])
 def getHospitalByID():
     requestHospitalID = request.args.get('id')
-    query =  "SELECT * FROM hospitals WHERE id = %s;"
-    cur.execute(query, requestHospitalID)
-    hospitalSQL = cur.fetchall()[0]
+
+    try:
+        query =  "SELECT * FROM hospitals WHERE id = %s;"
+        cur.execute(query, requestHospitalID)
+        hospitalSQL = cur.fetchall()[0]
+    except:
+        json.dumps({"data": {} }), 500, {'ContentType':'application/json'}
 
     hospital = {'id' : int(hospitalSQL[0]), 
                 'name': str(hospitalSQL[1]), 
