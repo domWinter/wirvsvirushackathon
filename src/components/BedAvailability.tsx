@@ -1,6 +1,6 @@
 import React from 'react';
 import { BedAvailability as BedAvailabilityProps } from '../types';
-import { FormattedMessage } from "react-intl";
+import { FormattedMessage, FormattedDate, FormattedTime } from "react-intl";
 
 const BedAvailability = ({
   iculc,
@@ -15,7 +15,7 @@ const BedAvailability = ({
       defaultMessage="Available Beds"
     >
       {(availableBeds) =>
-        <h3>{availableBeds}:</h3>
+        <h3>{availableBeds} (<FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/>):</h3>
       }
     </FormattedMessage>
     <FormattedMessage
@@ -40,14 +40,6 @@ const BedAvailability = ({
     >
       {(txt) =>
         <p>{txt}: {ecmo}</p>
-      }
-    </FormattedMessage>
-    <FormattedMessage
-      id="date"
-      defaultMessage="Date"
-    >
-      {(txt) =>
-        <p>{txt}: {timestamp}</p>
       }
     </FormattedMessage>
   </>
