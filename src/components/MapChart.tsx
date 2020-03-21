@@ -1,35 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Client } from '../client/client';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
+import React from 'react';
 
-const mapStyles = {
-    width: '100%',
-    height: '100%'
+import { Map as OpenMap, TileLayer } from "react-leaflet";
+
+export default function Map() {
+  return (
+    <OpenMap center={[45.4, -75.7]} zoom={12}>
+      <TileLayer
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+      />
+    </OpenMap>
+  );
 }
-
-export class MapContainer extends React.Component<any, any> {
-    render() {
-        return (
-            <Map 
-                google={this.props.google}
-                zoom={12}
-                style={mapStyles}
-                initialCenter={{ lat: 48.133333, lng: 11.566667}} />
-        );
-    }
-}
-
-export default GoogleApiWrapper({
-    apiKey: ''
-})(MapContainer);
 
 function markersFromHospitals(hospitals) {
-    const markers = hospitals.map(hospital => {
+    return hospitals.map(hospital => {
         return {
             name: hospital.name,
             coordinates: [hospital.location.longitude, hospital.location.latitude]
         };
     });
-
-    return markers;
 }
