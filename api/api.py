@@ -109,4 +109,4 @@ def addHospital():
     if not success:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
-    return json.dumps({"data": {'success' : True} }), 200, {'ContentType':'application/json'}
+    return json.dumps({"data": {'success' : True} }), 201, {'ContentType':'application/json'}
