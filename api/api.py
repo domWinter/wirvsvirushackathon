@@ -34,7 +34,7 @@ def addHospital():
 
 @app.route('/hospitals', methods=['GET'])
 def getHospitals():
-    return {'hospitals': mockHospitals}, 200
+    return {'data': mockHospitals}, 200
 
 @app.route('/hospital', methods=['GET'])
 def getHospitalByID():
@@ -43,6 +43,6 @@ def getHospitalByID():
 
     for hospital in mockHospitals:
         if hospital['id'] == requestHospitalID:
-            return hospital, 200
+            return {'data': hospital}, 200
 
     return {'hospital': {}}, 404

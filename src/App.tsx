@@ -19,10 +19,14 @@ const repository : RepositoryI = new Repository();
 
 const App = ({ className } : AppProps) => {
   const [hospital, setHospital] = useState<HospitalI | undefined>()
+  const [hospitals, setHospitals] = useState<HospitalI[] | undefined>()
   useEffect(() => {
     repository.getHospitalById(1234)
     .then(setHospital)
     .catch((error) => console.log("Cannot fetch hospital"));
+    repository.getHospitals()
+    .then(setHospitals)
+    .catch((error) => console.log("Cannot fetch hospitals"));
   }, []);
 
   return (
@@ -39,6 +43,9 @@ const App = ({ className } : AppProps) => {
         }
       </FormattedMessage>
       {hospital && <Hospital {...hospital}/>}
+      {hospitals && hospitals.map((hospital, i) =>
+        <Hospital {...hospital}/>
+      )}
     </div>
   );
 };

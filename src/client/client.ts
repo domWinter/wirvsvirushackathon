@@ -8,7 +8,7 @@ type requestParams = {
 
 const request = ({path, params}: requestParams) => {
   return axios.get(path, {params})
-  .then((response) => response.data)
+  .then((response) => response.data.data)
   .catch((error) => { throw new Error(error) })
 };
 
