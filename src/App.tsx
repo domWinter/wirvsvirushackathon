@@ -59,8 +59,8 @@ const App = ({ className } : AppProps) => {
 };
 
 function HospitalRoute() {
-  //@ts-ignore
-  return <Hospital {...useLocation().state} />
+  const hospital : HospitalI = useLocation().state as HospitalI;
+  return <Hospital {...hospital} />
 }
 
 const StyledApp = styled(App)`
