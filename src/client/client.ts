@@ -22,7 +22,7 @@ export class Repository implements RepositoryI {
     return request({
       path: '/hospital',
       params: {
-        'id': 12345
+        'id': 1
       }
     });
   }
