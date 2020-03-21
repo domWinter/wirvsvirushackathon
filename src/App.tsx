@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch, useLocation, useParams } from '
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Hospital from './components/Hospital';
-// TODO change to real repository
 import styled from 'styled-components';
 
 import {
@@ -12,9 +11,7 @@ import {
 } from './types';
 
 import HospitalList from './components/HospitalList';
-import HospitalForm from './components/HospitalForm';
 import Client from './client/client';
-import { FormattedMessage } from "react-intl";
 
 type AppProps = {
   className?: string
@@ -32,18 +29,6 @@ const App = ({ className } : AppProps) => {
 
   return (
     <div className={className}>
-      <HospitalForm />
-      <FormattedMessage
-        id="app.greeting"
-        description="Greeting to welcome the user to the app"
-        defaultMessage="Hello, {name}!"
-        values={{
-          name: 'Alex',
-        }}>
-        {(txt) =>
-          <p>{txt}</p>
-        }
-      </FormattedMessage>
       <Router>
         <Switch>
           <Route path='/hospital/:hospitalId'>
