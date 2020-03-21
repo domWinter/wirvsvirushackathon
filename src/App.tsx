@@ -2,15 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch, RouteComponentProps, useLocation } from 'react-router-dom';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-<<<<<<< HEAD
-import HospitalList from './components/HospitalList';
 import Hospital from './components/Hospital';
 // TODO change to real repository
-import { Repository } from './client/client';
-=======
 import styled from 'styled-components';
 
->>>>>>> bf31405f6d2f88bfed4ece564872eeb8a44844dd
 import {
   Hospital as HospitalI,
   Repository as RepositoryI
