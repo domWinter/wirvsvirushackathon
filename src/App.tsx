@@ -38,12 +38,11 @@ const App = ({ className } : AppProps) => {
           <p>{txt}</p>
         }
       </FormattedMessage>
-      {hospital && <p>{JSON.stringify(hospital)}</p>}
+      {hospital && <Hospital {...hospital}/>}
     </div>
   );
 };
 
-      // {hospital && <Hospital {...hospital} />}
 const StyledApp = styled(App)`
   text-align: center;
 `;
