@@ -17,7 +17,7 @@ const Hospital = ({
     {state}</p>
 
     <h3>Contact:</h3>
-    <p>Website: {website}<br/>
+    <p>Website: <a href={website}>{website}</a><br/>
     Phone Number: {phoneNumber}</p>
 
     <h3>Available Beds:</h3>
