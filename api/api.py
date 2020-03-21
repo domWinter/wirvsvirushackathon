@@ -105,7 +105,7 @@ def addHospital():
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
-    success = databaseUtils.addHospital(conn, 
+    ok = databaseUtils.addHospital(conn, 
                                         hospital['name'],
                                         hospital['address']['state'],
                                         hospital['address']['city'],
@@ -116,7 +116,52 @@ def addHospital():
                                         hospital['website'], 
                                         latitude, 
                                         longitude)
-    if not success:
+    if not ok:
         return json.dumps({"data": {'success' : False} }), 400, {'ContentType':'application/json'}
 
     return json.dumps({"data": {'success' : True} }), 200, {'ContentType':'application/json'}
+
+
+@app.route('/bedavailability', methods=['GET'])
+def getBedavailability():
+    requestHospitalID = request.args.get('id')
+
+    bedavailabilitesSQL = databaseUtils.getAllBedavailabilities(conn, requestHospitalID)
+
+    if bedavailabilitesSQL is None:
+        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+
+    bedavailabilites = []
+
+    try:
+        for row in bedavailabilitesSQL:
+            bedavailabilites.append({'id' : int(row[0]), 
+                                     'hospitalID': int(row[1]),
+                                     'iculc' : int(row[2]), 
+                                     'icuhc' : int(row[3]), 
+                                     'ecmo': int(row[4]), 
+                                     'timestamp' : str(row[5])
+                                    }) 
+    except:
+        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+
+    return json.dumps({"data" :  bedavailabilites}), 200, {'ContentType':'application/json'}
+
+@app.route('/bedavailability/latest', methods=['GET'])
+def getLatestBedavailability():
+    requestHospitalID = request.args.get('id')
+
+    bedavailabilitySQL = databaseUtils.getLatestBedavailability(conn, requestHospitalID)[0]
+
+    if bedavailabilitySQL is None:
+        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+
+    bedavailability = {'id' : int(bedavailabilitySQL[0]), 
+                       'hospitalID': int(bedavailabilitySQL[1]),
+                       'iculc' : int(bedavailabilitySQL[2]), 
+                       'icuhc' : int(bedavailabilitySQL[3]), 
+                       'ecmo': int(bedavailabilitySQL[4]), 
+                       'timestamp' : str(bedavailabilitySQL[5])
+                      }
+
+    return json.dumps({"data" : bedavailability}), 200, {'ContentType':'application/json'}

@@ -23,7 +23,7 @@ def getHospitalbyID(conn, hospitalID):
     except:
         return None
 
-def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, website,latitude,longitude):
+def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber,website,latitude,longitude):
     cur = conn.cursor()
     sql  = "INSERT INTO hospitals (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
     val = (name, state, city, postcode, street, streetNumber, phoneNumber, website, latitude, longitude)
@@ -34,6 +34,25 @@ def addHospital(conn,name,state,city,postcode,street,streetNumber,phoneNumber, w
         return False
     return True
 
+def getAllBedavailabilities(conn, hospitalID):
+    cur = conn.cursor()
+    sql = "SELECT * FROM bedavailability WHERE hospitalID = %s ORDER BY timestamp desc"
+    try:
+        cur.execute(sql, hospitalID)
+        bedavailabilitesSQL = cur.fetchall()
+        return bedavailabilitesSQL
+    except: 
+        return None
+
+def getLatestBedavailability(conn, hospitalID):
+    cur = conn.cursor()
+    sql = "SELECT * FROM bedavailability WHERE hospitalID = %s ORDER BY timestamp desc LIMIT 1"
+    try:
+        cur.execute(sql, hospitalID)
+        bedavailabilitesSQL = cur.fetchall()
+        return bedavailabilitesSQL
+    except: 
+        return None
 
 def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
     if timestamp == "current" :
