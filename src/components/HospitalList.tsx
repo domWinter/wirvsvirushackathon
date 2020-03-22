@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button, Tab, Row, Col, ListGroup } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
 import { FormattedMessage } from "react-intl";
 
 import { Hospital } from '../types';

@@ -14,32 +14,8 @@ export const MainRoute = () => {
   return (
     <>
         <Row style={{margin: 0}}>
-          <Col style={{ maxWidth: '100%', 'padding': 0 }}>
-            <Card className="bg-dark text-white">
-              <FormattedMessage
-                id="heatMap"
-                description="heatMap"
-                defaultMessage="Heat Map"
-              >
-                {(txt) => <Card.Header><h2>{txt}</h2></Card.Header>}
-              </FormattedMessage>
-              <div style={{padding: '0 50px 30px 50px'}}>
-                <Slider max={DAYS} min={0}
-                  onChange={(value) => {
-                    let d = new Date()
-                    d.setDate(d.getDate()-(DAYS-value));
-                    setDate(d.getTime()/1000);
-                  }}
-                  formatLabel={(value) => {
-                    let d = new Date()
-                    d.setDate(d.getDate()-(DAYS-value));
-                    return intl.formatDate(d)
-                  }}
-                />
-              </div>
-              <MapRoute date={date}/>
-              </Card>
-              <Card>
+          <Col>
+            <Card>
                 <Card.Body>
                   <Card.Text style={{ height:'130px' }} >
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
@@ -114,8 +90,35 @@ export const MainRoute = () => {
                   </Card.Text>
                 </Card.Body>
               </Card>
-
-          </Col>
+            </Col>
+          </Row>
+          <Row style={{marginTop: '10px'}} >
+            <Col style={{ maxWidth: '100%', 'padding': 8 }}>
+              <Card className="bg-dark text-white">
+                <FormattedMessage
+                  id="heatMap"
+                  description="heatMap"
+                  defaultMessage="Heat Map"
+                >
+                  {(txt) => <Card.Header><h2>{txt}</h2></Card.Header>}
+                </FormattedMessage>
+                <div style={{padding: '0 50px 30px 50px'}}>
+                  <Slider max={DAYS} min={0}
+                    onChange={(value) => {
+                      let d = new Date()
+                      d.setDate(d.getDate()-(DAYS-value));
+                      setDate(d.getTime()/1000);
+                    }}
+                    formatLabel={(value) => {
+                      let d = new Date()
+                      d.setDate(d.getDate()-(DAYS-value));
+                      return intl.formatDate(d)
+                    }}
+                  />
+                </div>
+                <MapRoute date={date}/>
+              </Card>
+            </Col>
         </Row>
         <Row style={{margin: 0}}>
           <Col style={{ maxWidth: '100%', 'padding': 0 }}>

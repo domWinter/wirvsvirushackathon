@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Button, Row, Col, Card } from 'react-bootstrap';
 import { useIntl, defineMessages } from "react-intl";
 
 import {

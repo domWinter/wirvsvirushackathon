@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button } from 'react-bootstrap';
 import { FormattedDate, FormattedTime, FormattedMessage, useIntl, defineMessages } from "react-intl";

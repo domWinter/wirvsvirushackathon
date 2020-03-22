@@ -9,7 +9,7 @@ const MESSAGES = {
   'contact': 'Kontakt',
   'date': 'Datum',
   'details': 'Details',
-  'heatMap': 'Heat Map',
+  'heatMap': 'Belegungskarte',
   'heatMapExplanation': 'Benutze den Layerknopf rechts um die Bettensituation verschiedener Katogerien anzuzeigen. Mit dem Slider kannst du das Datum verändern. Klicke auf die Marker um mehr Infos zu einem Krankenhaus zu erhalten.',
   'websiteDescription' : 'Darstellung der aktuellen Belegung von Krankenhaus Betten in Münchner Kliniken. Dies ist eine Demo Seite für den Hackathon #WirvsVirus der Bundesregierung und enthält aktuell keine echten Daten. Wir zeigen hier wieviele Betten des Types ICULC, ICUHC und ECMO in den jeweiligen Krankenhäusern frei sind.',
   'iculcExplanation' : 'ICULC: Intensivstationbett mit geringer Betreuung',
