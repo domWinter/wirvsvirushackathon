@@ -95,7 +95,7 @@ export const HospitalRoute = () => {
         <Col>
           <Card className="bg-dark">
           <Card.Header className="text-white"><h2>{intl.formatMessage(messages.freeBedCapacity)}</h2></Card.Header>
-            {bedAvailabilityData && <LineChart height={'800px'} width={'100%'} data={bedAvailabilityData} />}
+            {bedAvailabilityData && <LineChart height={'400px'} width={'100%'} data={bedAvailabilityData} />}
           </Card> 
         </Col>
       </Row>
