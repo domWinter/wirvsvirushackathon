@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Row, Col, Card} from 'react-bootstrap';
+import {Row, Col, Card, ListGroup, Tab, Nav} from 'react-bootstrap';
 import HospitalsRoute from './HospitalsRoute';
 import { useIntl, FormattedMessage } from "react-intl";
 import MapRoute from './MapRoute';
@@ -38,14 +38,83 @@ export const MainRoute = () => {
                 />
               </div>
               <MapRoute date={date}/>
-              <FormattedMessage
-                id="heatMapEpxlanation"
-                description="Explanation for the heat map"
-                defaultMessage="Use the layer button on the right to visualise the bed capacities for different categories. You can change the date using the slider. Click on a marker to get more information about the chosen hospital. ICULC=TODO, etc."
-              >
-                {(txt) => <p>{txt}</p>}
-              </FormattedMessage>
-            </Card>
+              </Card>
+              <Card>
+                <Card.Body>
+                  <Card.Text>
+                    <Tab.Container id="left-tabs-example" defaultActiveKey="first">
+                      <Row>
+                        <Col sm={3}>
+                          <Nav variant="pills" className="flex-column">
+                            <Nav.Item>
+                              <Nav.Link eventKey="first">Website</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                              <Nav.Link eventKey="second">Funktionserklärung</Nav.Link>
+                            </Nav.Item>
+                            <Nav.Item>
+                              <Nav.Link eventKey="third">ICULC / ICUHC / ECMO</Nav.Link>
+                            </Nav.Item>
+                          </Nav>
+                        </Col>
+                        <Col sm={9}>
+                          <Tab.Content style={{ textAlign:'left' }}>
+                            <Tab.Pane style={{ fontSize:'14pt'}} eventKey="first" >
+                              <FormattedMessage
+                                id="websiteDescription"
+                                description="Explanation of the website"
+                                defaultMessage="Visualization of the occupation of hospital beds in munich. This is a demo site for the #WirvsVirus hackathon of the german gouvernment. This site does not contain real data! 
+                                We want to show here how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals"
+                              >
+                                {(txt) => <p>{txt}</p>}
+                              </FormattedMessage>
+                            </Tab.Pane>
+                            <Tab.Pane style={{ fontSize:'14pt'}} eventKey="second">
+                              <FormattedMessage
+                                id="heatMapExplanation"
+                                description="Explanation for the heat map"
+                                defaultMessage="Use the layer button on the right to visualise the bed capacities for different categories. You can change the date using the slider. Click on a marker to get more information about the chosen hospital."
+                              >
+                                {(txt) => <p>{txt}</p>}
+                              </FormattedMessage>
+                            </Tab.Pane>
+                            <Tab.Pane eventKey="third">
+                              <ListGroup variant="flush">
+                              
+                                <FormattedMessage
+                                  id="iculcExplanation"
+                                  description="Explanation of iculc"
+                                  defaultMessage="Intensive care unit with low care"
+                                >
+                                  {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
+                                </FormattedMessage>
+  
+                                <FormattedMessage
+                                  id="icuhcExplanation"
+                                  description="Explanation of icuhc"
+                                  defaultMessage="Intensive care unit with high care"
+                                >
+                                  {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
+                                </FormattedMessage>
+
+                                <FormattedMessage
+                                  id="ecmoExplanation"
+                                  description="Explanation of ecmo"
+                                  defaultMessage="Extracorporeal membrane oxygenation beds"
+                                >
+                                  {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
+                                </FormattedMessage>
+
+                              </ListGroup>
+                            </Tab.Pane>
+                          </Tab.Content>
+                        </Col>
+                      </Row>
+                    </Tab.Container>
+                  </Card.Text>
+                </Card.Body>
+              </Card>
+
           </Col>
         </Row>
         <Row style={{margin: 0}}>

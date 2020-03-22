@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Table, Button } from 'react-bootstrap';
+import { Table, Button, Tab, Row, Col, ListGroup } from 'react-bootstrap';
 import { FormattedMessage } from "react-intl";
 
 import { Hospital } from '../types';
@@ -15,7 +15,7 @@ const HospitalList = ({
 } : HospitalListProps) => {
     return (
         <div className="table-responsive">
-            <Table striped bordered hover variant="dark" className="table">
+            <Table responsive striped bordered hover variant="dark" className="table">
                 <thead>
                   <tr>
                     <FormattedMessage
