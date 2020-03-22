@@ -22,8 +22,14 @@ class TestApiRoutes(unittest.TestCase):
         r = requests.get("http://127.0.0.1:5000/bedavailability/latest" + "?id=" + str(id))
         self.assertEqual(str(r.status_code), '200')
 
-    def getMapData(self):
+    def testGetMapData(self):
         r = requests.get("http://127.0.0.1:5000/mapdata")
+        self.assertEqual(str(r.status_code), '200')
+
+    def testGetMapDataBefore(self):
+        timestamp = 1684874464
+        r = requests.get("http://127.0.0.1:5000/mapdata"+"?date="+str(timestamp))
+        print(r.text)
         self.assertEqual(str(r.status_code), '200')
 
 if __name__ == '__main__':
