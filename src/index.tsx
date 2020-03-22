@@ -7,7 +7,7 @@ import { LOCALE, MESSAGES } from './constants/localisation/de';
 import App from './App';
 
 ReactDOM.render(
-  <IntlProvider locale={LOCALE} messages={MESSAGES}>
+  <IntlProvider locale={LOCALE} messages={LOCALE.slice(0, 2) === 'de' ? MESSAGES : {}}>
     <App />
   </IntlProvider>,
   document.getElementById('root')

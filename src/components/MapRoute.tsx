@@ -19,7 +19,13 @@ export const MapRoute = () => {
       ecmo,
       ecmoMax,
       timestamp,
+      phoneNumber,
       id,
+      state,
+      city,
+      postcode,
+      street,
+      streetNumber,
       ...rest
     }:MapDataEntry) => {
       return {
@@ -33,17 +39,23 @@ export const MapRoute = () => {
           icuhc,
           icuhcMax,
           ecmo,
+          phoneNumber,
           id,
-          ecmoMax
+          ecmoMax,
+          state,
+          city,
+          postcode,
+          street,
+          streetNumber,
         }],
         heatMap: [
           ...heatMap,
           {
             longitude,
             latitude,
-            iculcIntensity: (iculc*1.0)/iculcMax,
-            icuhcIntensity: (icuhc*1.0)/icuhcMax,
-            ecmoIntensity: (ecmo*1.0)/ecmoMax
+            iculcIntensity: (iculcMax-iculc*1.0)/iculcMax,
+            icuhcIntensity: (icuhcMax-icuhc*1.0)/icuhcMax,
+            ecmoIntensity: (ecmoMax-ecmo*1.0)/ecmoMax
           }
         ]
       };

@@ -14,8 +14,8 @@ const HospitalList = ({
     hospitals
 } : HospitalListProps) => {
     return (
-        <div>
-            <Table striped bordered hover variant="dark">
+        <div className="table-responsive">
+            <Table striped bordered hover variant="dark" className="table">
                 <thead>
                   <tr>
                     <FormattedMessage

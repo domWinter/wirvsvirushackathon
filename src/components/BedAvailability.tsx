@@ -3,6 +3,8 @@ import { Table, Badge } from 'react-bootstrap';
 import { BedAvailability as BedAvailabilityProps } from '../types';
 import { FormattedMessage, FormattedDate, FormattedTime } from "react-intl";
 
+import { compVariant } from '../utils/utils';
+
 const BedAvailability = ({
   iculc,
   iculcMax,
@@ -45,9 +47,9 @@ const BedAvailability = ({
       </thead>
       <tbody>
         <tr>
-          <td><Badge pill variant="success">{iculc + "/" + iculcMax}</Badge></td>
-          <td><Badge pill variant="success">{icuhc + "/" + icuhcMax}</Badge></td>
-          <td><Badge pill variant="success">{ecmo + "/" + ecmoMax}</Badge></td>
+          <td><Badge pill variant={compVariant(iculc,iculcMax)}>{iculc + "/" + iculcMax}</Badge></td>
+          <td><Badge pill variant={compVariant(icuhc,icuhcMax)}>{icuhc + "/" + icuhcMax}</Badge></td>
+          <td><Badge pill variant={compVariant(ecmo,ecmoMax)}>{ecmo + "/" + ecmoMax}</Badge></td>
           <td><FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/></td>
         </tr>
       </tbody>
