@@ -16,10 +16,6 @@ type LineChartProps = {
 const LineChart = ({ data, height, width } : LineChartProps) => {
   const intl = useIntl();
 
-  const messages = defineMessages({
-    date: { id: 'date', defaultMessage: 'Datum' },
-  });
-
   const theme = {
     axis: {
       textColor: '#eee',
@@ -36,24 +32,8 @@ const LineChart = ({ data, height, width } : LineChartProps) => {
     <div style={{height, width}}>
 
       <ResponsiveLine
-          data={data}
-          margin={{ top: 40, right: 40, bottom: 40, left: 100 }}
-          axisBottom={{
-            orient: 'bottom',
-            tickSize: 5,
-            tickPadding: 16,
-            legend: intl.formatMessage(messages.date),
-            legendOffset: 36,
-            legendPosition: 'center'
-        }}
-        axisLeft={{
-            orient: 'left',
-            tickSize: 5,
-            tickPadding: 16,
-            legend: 'count',
-            legendOffset: -40,
-            legendPosition: 'center'
-        }}
+        data={data}
+        margin={{ top: 40, right: 40, bottom: 40, left: 50 }}
         dotSize={6}
         theme={theme}
         useMesh={true}
