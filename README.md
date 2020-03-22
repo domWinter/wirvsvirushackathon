@@ -3,11 +3,11 @@
 Gerade bei dem aktuellen Notstand ist es sehr unübersichtlich zu Erfahren in welchem Krankenhaus gerade Betten frei sind. Auch ist es schwierig, die Entwicklung der Belegung dieser Betten über die Zeit genau zu erfassen und auszuwerten. Hier soll unser Projekt ansetzen.
 
 
-![Demo](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/967/946/datas/gallery.jpg)
+![Demo](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/968/606/datas/original.png)
 
 ## Devpost Projekt
 
-* [Link](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/968/606/datas/original.png) zum Devpost-Projekt
+* [Link](https://devpost.com/software/0_24_krankenhauser_bettenverfugbarkeitsvisualisierung) zum Devpost-Projekt
 * [Demo](http://52.170.170.11:3000/) des Projekts
 
 
