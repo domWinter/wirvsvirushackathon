@@ -16,3 +16,8 @@ code {
   width: 100%;
   height: 50vh;
 }
+
+#logo {
+  float: right;
+  height: 100px;
+}

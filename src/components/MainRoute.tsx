@@ -5,7 +5,7 @@ import { useIntl, FormattedMessage } from "react-intl";
 import MapRoute from './MapRoute';
 import Slider from './Slider';
 
-const DAYS = 100;
+const DAYS = 81;
 
 export const MainRoute = () => {
   const intl = useIntl();
@@ -22,10 +22,22 @@ export const MainRoute = () => {
                         <Col sm={3}>
                           <Nav variant="pills" className="flex-column">
                             <Nav.Item>
-                              <Nav.Link eventKey="first">Website</Nav.Link>
+                              <FormattedMessage
+                                id="website"
+                                description="website"
+                                defaultMessage="Website"
+                              >
+                                {(txt) => <Nav.Link eventKey="first">{txt}</Nav.Link>}
+                              </FormattedMessage>
                             </Nav.Item>
                             <Nav.Item>
-                              <Nav.Link eventKey="second">Funktionserklärung</Nav.Link>
+                            <FormattedMessage
+                                id="featureDescription"
+                                description="Functions"
+                                defaultMessage="Feature Description"
+                              >
+                                {(txt) => <Nav.Link eventKey="second">{txt}</Nav.Link>}
+                            </FormattedMessage>
                             </Nav.Item>
                             <Nav.Item>
                               <Nav.Link eventKey="third">ICULC / ICUHC / ECMO</Nav.Link>
@@ -38,10 +50,10 @@ export const MainRoute = () => {
                               <FormattedMessage
                                 id="websiteDescription"
                                 description="Explanation of the website"
-                                defaultMessage="Visualization of the occupation of hospital beds in munich. This is a demo site for the #WirvsVirus hackathon of the german gouvernment. This site does not contain real data! 
-                                We want to show here how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals"
+                                defaultMessage="Visualization of the occupation of hospital beds in Munich. This is a demo site for the #WirvsVirus hackathon of the German government. This site does not contain real data! 
+                                We want to visualise how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals."
                               >
-                                {(txt) => <p>{txt}</p>}
+                                {(txt) => <><p><a href="https://wirvsvirushackathon.org/"><img src={'/logo.png'} alt="Logo" id='logo'/></a>{txt}</p></>}
                               </FormattedMessage>
                             </Tab.Pane>
                             <Tab.Pane style={{ fontSize:'14pt'}} eventKey="second">
@@ -59,7 +71,7 @@ export const MainRoute = () => {
                                 <FormattedMessage
                                   id="iculcExplanation"
                                   description="Explanation of iculc"
-                                  defaultMessage="Intensive care unit with low care"
+                                  defaultMessage="ICULC: Intensive care unit with low care"
                                 >
                                   {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
                                 </FormattedMessage>
@@ -67,7 +79,7 @@ export const MainRoute = () => {
                                 <FormattedMessage
                                   id="icuhcExplanation"
                                   description="Explanation of icuhc"
-                                  defaultMessage="Intensive care unit with high care"
+                                  defaultMessage="ICUHC: Intensive care unit with high care"
                                 >
                                   {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
                                 </FormattedMessage>
@@ -75,7 +87,7 @@ export const MainRoute = () => {
                                 <FormattedMessage
                                   id="ecmoExplanation"
                                   description="Explanation of ecmo"
-                                  defaultMessage="Extracorporeal membrane oxygenation beds"
+                                  defaultMessage="ECMO: Extracorporeal membrane oxygenation beds"
                                 >
                                   {(txt) => <ListGroup.Item>{txt}</ListGroup.Item>}
                                 </FormattedMessage>
@@ -90,7 +102,7 @@ export const MainRoute = () => {
               </Card>
             </Col>
           </Row>
-          <Row style={{marginTop: '10px', margin: 0}}>
+          <Row style={{marginTop: '10px', marginLeft: 0, marginRight: 0}}>
             <Col style={{ maxWidth: '100%', 'padding': 0 }}>
               <Card className="bg-dark text-white">
                 <FormattedMessage
@@ -118,7 +130,7 @@ export const MainRoute = () => {
               </Card>
             </Col>
         </Row>
-        <Row style={{margin: 0}}>
+        <Row style={{marginTop: '10px', marginLeft: 0, marginRight: 0}}>
           <Col style={{ maxWidth: '100%', 'padding': 0 }}>
             <Card className="bg-dark text-white">
               <FormattedMessage
