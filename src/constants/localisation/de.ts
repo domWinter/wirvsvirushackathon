@@ -5,6 +5,7 @@ const MESSAGES = {
   'availableBeds': 'Verfügbare Betten',
   'back': 'Zurück',
   'bedCapacity': 'Bettenbelegung',
+  'freeBedCapacity': 'Freie Bettenbelegung',
   'contact': 'Kontakt',
   'date': 'Datum',
   'details': 'Details',
