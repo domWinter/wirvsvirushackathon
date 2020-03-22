@@ -27,7 +27,7 @@ type MapProps = {
 };
 
 const MUNICH = [48.13743, 11.57549];
-const MAX = 0.3;
+const MAX = 0.53;
 const INTENSITY_FACTOR = 4;
 
 export const Map = ({heatMap, markers} : MapProps) => {
