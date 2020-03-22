@@ -17,7 +17,6 @@ export const MainRoute = () => {
           <Col>
             <Card>
                 <Card.Body>
-                  <Card.Text style={{ height:'130px' }} >
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                       <Row>
                         <Col sm={3}>
@@ -87,13 +86,12 @@ export const MainRoute = () => {
                         </Col>
                       </Row>
                     </Tab.Container>
-                  </Card.Text>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
-          <Row style={{marginTop: '10px'}} >
-            <Col style={{ maxWidth: '100%', 'padding': 8 }}>
+          <Row style={{marginTop: '10px', margin: 0}}>
+            <Col style={{ maxWidth: '100%', 'padding': 0 }}>
               <Card className="bg-dark text-white">
                 <FormattedMessage
                   id="heatMap"

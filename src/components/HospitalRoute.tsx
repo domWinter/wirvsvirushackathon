@@ -31,7 +31,8 @@ export const HospitalRoute = () => {
   });
 
   const transformBedAvailability = (bedAvailability)  => {
-    const data = bedAvailability.reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest} : BedAvailabilityI) => {
+    const data = bedAvailability.splice(0, Math.min(MAX_POINTS,bedAvailability.length))
+      .reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest} : BedAvailabilityI) => {
       // const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
       const xDate = intl.formatDate(timestamp);
       return {
@@ -43,15 +44,15 @@ export const HospitalRoute = () => {
     setBedAvailabilityData([
       {
         id: intl.formatMessage(messages.iculc),
-        data: data.dIculc.splice(0, Math.min(MAX_POINTS,data.dIculc.length))
+        data: data.dIculc
       },
       {
         id: intl.formatMessage(messages.icuhc),
-        data: data.dIcuhc.splice(0, Math.min(MAX_POINTS,data.dIcuhc.length)),
+        data: data.dIcuhc
       },
       {
         id: intl.formatMessage(messages.ecmo),
-        data: data.dEcmo.splice(0, Math.min(MAX_POINTS,data.dEcmo.length))
+        data: data.dEcmo
       }
     ]);
   }
