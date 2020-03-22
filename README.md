@@ -7,8 +7,8 @@ Gerade bei dem aktuellen Notstand ist es sehr unübersichtlich zu Erfahren in we
 
 ## Devpost Projekt
 
-* [Link](https://devpost.com/software/0_24_krankenhauser_bettenverfugbarkeitsvisualisierung) zum Devpost-Projekt
-* [Demo](http://52.170.170.11:3000/)
+* [Link](https://challengepost-s3-challengepost.netdna-ssl.com/photos/production/software_photos/000/968/606/datas/original.png) zum Devpost-Projekt
+* [Demo](http://52.170.170.11:3000/) des Projekts
 
 
 ## Dependencies
