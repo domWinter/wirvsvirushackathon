@@ -22,6 +22,8 @@ type MapProps = {
 };
 
 const MUNICH = [48.13743, 11.57549];
+const MAX = 0.3;
+const INTENSITY_FACTOR = 4;
 
 export const Map = ({heatMap, markers} : MapProps) => {
   const intl = useIntl();
@@ -32,8 +34,6 @@ export const Map = ({heatMap, markers} : MapProps) => {
     iculc: { id: 'iculc', defaultMessage: 'ICULC' },
     icuhc: { id: 'iculc', defaultMessage: 'ICUHC' }
   });
-  console.log(heatMap);
-  console.log(markers);
 
   return (
     <OpenMap
@@ -48,7 +48,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
             attribution="&copy; <a href=http://osm.org/copyright>OpenStreetMap</a> contributors"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + intl.formatMessage(messages.iculc)} checked>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.iculc)} checked>
           <FeatureGroup color="purple">
             <HeatmapLayer
               fitBoundsOnLoad
@@ -56,12 +56,12 @@ export const Map = ({heatMap, markers} : MapProps) => {
               points={heatMap}
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
-              intensityExtractor={m => m.iculcIntensity}
-              max={1}
+              intensityExtractor={m => m.icuhcIntensity*INTENSITY_FACTOR}
+              max={MAX}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + intl.formatMessage(messages.icuhc)}>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.icuhc)}>
           <FeatureGroup color="purple">
             <HeatmapLayer
               fitBoundsOnLoad
@@ -69,12 +69,12 @@ export const Map = ({heatMap, markers} : MapProps) => {
               points={heatMap}
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
-              intensityExtractor={m => m.icuhcIntensity}
-              max={1}
+              intensityExtractor={m => m.icuhcIntensity*INTENSITY_FACTOR}
+              max={MAX}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
-        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + intl.formatMessage(messages.ecmo)}>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.ecmo)}>
           <FeatureGroup color="purple">
             <HeatmapLayer
               fitBoundsOnLoad
@@ -82,8 +82,8 @@ export const Map = ({heatMap, markers} : MapProps) => {
               points={heatMap}
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
-              intensityExtractor={m => m.ecmoIntensity}
-              max={1}
+              intensityExtractor={m => m.ecmoIntensity*INTENSITY_FACTOR}
+              max={MAX}
             />
           </FeatureGroup>
         </LayersControl.Overlay>
