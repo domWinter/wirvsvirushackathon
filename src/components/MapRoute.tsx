@@ -53,6 +53,7 @@ export const MapRoute = ({date}) => {
           {
             longitude,
             latitude,
+            sumIntensity: (1.0*iculcMax+icuhcMax+ecmoMax-iculc-icuhc-ecmo)/(iculcMax+icuhcMax+ecmoMax),
             iculcIntensity: (iculcMax-iculc*1.0)/iculcMax,
             icuhcIntensity: (icuhcMax-icuhc*1.0)/icuhcMax,
             ecmoIntensity: (ecmoMax-ecmo*1.0)/ecmoMax

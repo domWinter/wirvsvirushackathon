@@ -19,6 +19,7 @@ export type BedAvailability = {
 }
 
 export type HeatMapEntry = Location & {
+  sumIntensity: number,
   iculcIntensity: number,
   icuhcIntensity: number,
   ecmoIntensity: number

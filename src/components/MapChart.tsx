@@ -35,6 +35,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
   const messages = defineMessages({
     marker: { id: 'marker', defaultMessage: 'Marker' },
     heatMap: { id: 'heatMap', defaultMessage: 'Heat Map' },
+    totalCapacity: { id: 'totalCapacity', defaultMessage: 'Total Capacity' },
     ecmo: { id: 'ecmo', defaultMessage: 'ECMO' },
     iculc: { id: 'iculc', defaultMessage: 'ICULC' },
     icuhc: { id: 'iculc', defaultMessage: 'ICUHC' }
@@ -53,7 +54,20 @@ export const Map = ({heatMap, markers} : MapProps) => {
             attribution="&copy; <a href=http://osm.org/copyright>OpenStreetMap</a> contributors"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.iculc)} checked>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.totalCapacity)} checked>
+          <FeatureGroup color="purple">
+            <HeatmapLayer
+              fitBoundsOnLoad
+              fitBoundsOnUpdate
+              points={heatMap}
+              longitudeExtractor={m => m.longitude}
+              latitudeExtractor={m => m.latitude}
+              intensityExtractor={m => (m.sumIntensity)*INTENSITY_FACTOR}
+              max={MAX}
+            />
+          </FeatureGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.iculc)}>
           <FeatureGroup color="purple">
             <HeatmapLayer
               fitBoundsOnLoad
@@ -100,6 +114,12 @@ export const Map = ({heatMap, markers} : MapProps) => {
               <Marker key={i} position={[latitude,longitude]} >
                 <Popup>
                   <span>{name}</span>
+                  <FormattedMessage
+                    id="totalCapacity"
+                    defaultMessage="Total Capacit"
+                  >
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc+icuhc+ecmo,iculcMax+icuhcMax+ecmoMax)}>{(iculcMax+icuhcMax+ecmoMax-(iculc+icuhc+ecmo)) + "/" + (iculcMax+icuhcMax+ecmoMax)}</Badge></p>}
+                  </FormattedMessage>
                   <FormattedMessage
                     id="iculc"
                     defaultMessage="ICULC"

@@ -17,6 +17,7 @@ const MESSAGES = {
   'name': 'Name',
   'open': 'Öffnen',
   'phone': 'Telefon',
+  'totalCapacity': 'Gesamtkapazität',
   'updated': 'Updated',
   'website': 'Website',
 
