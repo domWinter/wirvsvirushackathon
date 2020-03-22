@@ -41,7 +41,7 @@ export const MainRoute = () => {
               </Card>
               <Card>
                 <Card.Body>
-                  <Card.Text>
+                  <Card.Text style={{ height:'130px' }} >
                     <Tab.Container id="left-tabs-example" defaultActiveKey="first">
                       <Row>
                         <Col sm={3}>
