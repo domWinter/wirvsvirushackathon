@@ -50,8 +50,8 @@ export const MainRoute = () => {
                               <FormattedMessage
                                 id="websiteDescription"
                                 description="Explanation of the website"
-                                defaultMessage="Visualization of the occupation of hospital beds in munich. This is a demo site for the #WirvsVirus hackathon of the german gouvernment. This site does not contain real data! 
-                                We want to show here how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals"
+                                defaultMessage="Visualization of the occupation of hospital beds in Munich. This is a demo site for the #WirvsVirus hackathon of the German government. This site does not contain real data! 
+                                We want to visualise how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals."
                               >
                                 {(txt) => <><p><a href="https://wirvsvirushackathon.org/"><img src={'/logo.png'} alt="Logo" id='logo'/></a>{txt}</p></>}
                               </FormattedMessage>
