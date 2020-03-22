@@ -104,19 +104,19 @@ export const Map = ({heatMap, markers} : MapProps) => {
                     id="iculc"
                     defaultMessage="ICULC"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc,iculcMax)}>{iculc + "/" + iculcMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc,iculcMax)}>{(iculcMax-iculc) + "/" + iculcMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="icuhc"
                     defaultMessage="ICUHC"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(icuhc,icuhcMax)}>{icuhc + "/" + icuhcMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(icuhc,icuhcMax)}>{(icuhcMax-icuhc) + "/" + icuhcMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="ecmo"
                     defaultMessage="ECMO"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(ecmo,ecmoMax)}>{ecmo + "/" + ecmoMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(ecmo,ecmoMax)}>{(ecmoMax-ecmo) + "/" + ecmoMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="updated"

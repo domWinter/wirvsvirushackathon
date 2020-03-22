@@ -47,9 +47,9 @@ const BedAvailability = ({
       </thead>
       <tbody>
         <tr>
-          <td><Badge pill variant={compVariant(iculc,iculcMax)}>{iculc + "/" + iculcMax}</Badge></td>
-          <td><Badge pill variant={compVariant(icuhc,icuhcMax)}>{icuhc + "/" + icuhcMax}</Badge></td>
-          <td><Badge pill variant={compVariant(ecmo,ecmoMax)}>{ecmo + "/" + ecmoMax}</Badge></td>
+          <td><Badge pill variant={compVariant(iculc,iculcMax)}>{(iculcMax-iculc) + "/" + iculcMax}</Badge></td>
+          <td><Badge pill variant={compVariant(icuhc,icuhcMax)}>{(icuhcMax-icuhc) + "/" + icuhcMax}</Badge></td>
+          <td><Badge pill variant={compVariant(ecmo,ecmoMax)}>{(ecmoMax-ecmo) + "/" + ecmoMax}</Badge></td>
           <td><FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/></td>
         </tr>
       </tbody>
