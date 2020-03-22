@@ -27,20 +27,22 @@ export const HospitalRoute = () => {
     icuhc: { id: 'icuhc', defaultMessage: 'ICUHC' },
     ecmo: { id: 'ecmo', defaultMessage: 'ECMO' },
     back: { id: 'back', defaultMessage: 'Back' },
-    freeBedCapacity: { id: 'freeBedCapacity', defaultMessage: 'Free Bed Capacity' }
+    freeBedCapacity: { id: 'freeBedCapacity', defaultMessage: 'Free Bed Capacity' },
+    totalCapacity: { id: 'totalCapacity', defaultMessage: 'Total Capacity' }
   });
 
   const transformBedAvailability = (bedAvailability)  => {
     const data = bedAvailability.splice(0, Math.min(MAX_POINTS,bedAvailability.length))
-      .reduceRight(({dIculc,dIcuhc,dEcmo}, {timestamp,iculc,icuhc,ecmo,...rest} : BedAvailabilityI) => {
+      .reduceRight(({dIculc,dIcuhc,dEcmo,dTotal}, {timestamp,iculc,icuhc,ecmo,...rest} : BedAvailabilityI) => {
       // const xDate = intl.formatDate(timestamp) + " " + intl.formatTime(timestamp);
       const xDate = intl.formatDate(timestamp);
       return {
         dIculc: [...dIculc, {x: xDate, y: iculc}],
         dIcuhc: [...dIcuhc, {x: xDate, y: icuhc}],
-        dEcmo: [...dEcmo, {x: xDate, y: ecmo}]
+        dEcmo: [...dEcmo, {x: xDate, y: ecmo}],
+        dTotal: [...dTotal, {x: xDate, y: iculc+icuhc+ecmo}],
       };
-    }, {dIculc: [], dIcuhc: [], dEcmo: []});
+      }, {dIculc: [], dIcuhc: [], dEcmo: [], dTotal: []});
     setBedAvailabilityData([
       {
         id: intl.formatMessage(messages.iculc),
@@ -53,6 +55,10 @@ export const HospitalRoute = () => {
       {
         id: intl.formatMessage(messages.ecmo),
         data: data.dEcmo
+      },
+      {
+        id: intl.formatMessage(messages.totalCapacity),
+        data: data.dTotal
       }
     ]);
   }
