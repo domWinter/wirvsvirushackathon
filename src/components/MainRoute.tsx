@@ -102,7 +102,7 @@ export const MainRoute = () => {
               </Card>
             </Col>
           </Row>
-          <Row style={{marginTop: '10px', margin: 0}}>
+          <Row style={{marginTop: '10px', marginLeft: 0, marginRight: 0}}>
             <Col style={{ maxWidth: '100%', 'padding': 0 }}>
               <Card className="bg-dark text-white">
                 <FormattedMessage
@@ -130,7 +130,7 @@ export const MainRoute = () => {
               </Card>
             </Col>
         </Row>
-        <Row style={{margin: 0}}>
+        <Row style={{marginTop: '10px', marginLeft: 0, marginRight: 0}}>
           <Col style={{ maxWidth: '100%', 'padding': 0 }}>
             <Card className="bg-dark text-white">
               <FormattedMessage
