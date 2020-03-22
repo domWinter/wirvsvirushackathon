@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button } from 'react-bootstrap';
 import { FormattedDate, FormattedTime, FormattedMessage, useIntl, defineMessages } from "react-intl";
@@ -61,7 +61,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
               points={heatMap}
               longitudeExtractor={m => m.longitude}
               latitudeExtractor={m => m.latitude}
-              intensityExtractor={m => m.icuhcIntensity*INTENSITY_FACTOR}
+              intensityExtractor={m => (m.icuhcIntensity)*INTENSITY_FACTOR}
               max={MAX}
             />
           </FeatureGroup>

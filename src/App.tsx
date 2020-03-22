@@ -20,7 +20,7 @@ const App = ({ className } : AppProps) => {
             <HospitalRoute />
           </Route>
           <Route path='/map'>
-            <MapRoute />
+            <MapRoute date={Date.now()/1000}/>
           </Route>
           <Route path='/'>
             <MainRoute />
