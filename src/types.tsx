@@ -31,7 +31,7 @@ export type MapDataEntry =
 
 export type MapData = MapDataEntry[];
 
-export type Marker = Location & Extract<Hospital, "name" | "timestamp" | "id"> & Exclude<BedAvailability, "id" | "hospitalID">
+export type Marker = Location & Exclude<Hospital, "location" | "address"> & Exclude<BedAvailability, "id" | "hospitalID"> & Address
 
 export type Location = {
     longitude: number,

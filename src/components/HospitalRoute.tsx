@@ -76,7 +76,6 @@ export const HospitalRoute = () => {
   
   return (
     <>
-
        <Row>
         <Col>
           {hospital && <Hospital {...hospital} />}
@@ -91,9 +90,9 @@ export const HospitalRoute = () => {
           <Card.Header><h2>{intl.formatMessage(messages.bedCapacity)}</h2></Card.Header>
             {bedAvailabilityData && <LineChart height={'800px'} width={'100%'} data={bedAvailabilityData} />}
           </Card> 
-           <Button size="sm" variant="light"><Link to='/'>{intl.formatMessage(messages.back)}</Link></Button>
         </Col>
       </Row>
+      <Link to='/'>{intl.formatMessage(messages.back)}<Button size="lg" variant="link"></Button></Link>
    </>
   );
 };

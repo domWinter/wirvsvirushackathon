@@ -1,5 +1,9 @@
 import React from 'react';
-import { useIntl, defineMessages } from "react-intl";
+import { Link } from 'react-router-dom';
+import { Badge, Button } from 'react-bootstrap';
+import { FormattedDate, FormattedTime, FormattedMessage, useIntl, defineMessages } from "react-intl";
+import HeatmapLayer from "react-leaflet-heatmap-layer";
+
 import {
   HeatMap,
   Marker as MarkerI
@@ -13,7 +17,8 @@ import {
   LayersControl,
   TileLayer
 } from "react-leaflet";
-import HeatmapLayer from "react-leaflet-heatmap-layer";
+
+import { compVariant } from '../utils/utils';
 
 
 type MapProps = {
@@ -89,10 +94,57 @@ export const Map = ({heatMap, markers} : MapProps) => {
         </LayersControl.Overlay>
         <LayersControl.Overlay name={intl.formatMessage(messages.marker)} checked>
           <FeatureGroup color="purple">
-            {markers.map(({longitude,latitude,name,timestamp},i) => 
+            {/* GGG We should have not flattened in the db here...*/}
+            {markers.map(({longitude,latitude,name,timestamp,iculc,iculcMax,icuhc,icuhcMax,ecmo,ecmoMax,id,phoneNumber,website,
+              state, city, postcode, street, streetNumber },i) => 
               <Marker key={i} position={[latitude,longitude]} >
                 <Popup>
                   <span>{name}</span>
+                  <FormattedMessage
+                    id="iculc"
+                    defaultMessage="ICULC"
+                  >
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc,iculcMax)}>{iculc + "/" + iculcMax}</Badge></p>}
+                  </FormattedMessage>
+                  <FormattedMessage
+                    id="icuhc"
+                    defaultMessage="ICUHC"
+                  >
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(icuhc,icuhcMax)}>{icuhc + "/" + icuhcMax}</Badge></p>}
+                  </FormattedMessage>
+                  <FormattedMessage
+                    id="ecmo"
+                    defaultMessage="ECMO"
+                  >
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(ecmo,ecmoMax)}>{ecmo + "/" + ecmoMax}</Badge></p>}
+                  </FormattedMessage>
+                  <FormattedMessage
+                    id="updated"
+                    description="updated timed"
+                    defaultMessage="Updated"
+                  >
+                    {(txt) => <p>{txt} <FormattedDate value={timestamp}/> <FormattedTime value={timestamp}/></p>}
+                  </FormattedMessage>
+                  <Link to={{
+                      pathname: `/hospital/${id}`,
+                      state: {
+                        id,
+                        name,
+                        address: { state, city, postcode, street, streetNumber },
+                        phoneNumber,
+                        website,
+                        location: {latitude, longitude}
+                      }
+                    }}
+                  >
+                    <FormattedMessage
+                      id="details"
+                      description="Detailed information"
+                      defaultMessage="Details"
+                    >
+                      {(txt) => <div className="text-center"><Button size="sm" className="" variant="info">{txt}</Button></div>}
+                    </FormattedMessage>
+                  </Link>
                 </Popup>
               </Marker>
             )}
