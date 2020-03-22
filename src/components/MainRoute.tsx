@@ -34,7 +34,7 @@ export const MainRoute = () => {
               <FormattedMessage
                 id="heatMapEpxlanation"
                 description="Explanation for the heat map"
-                defaultMessage="TODO"
+                defaultMessage="Use the layer button on the right to visualise the bed capacities for different categories. You can change the date using the slider. Click on a marker to get more information about the chosen hospital. ICULC=TODO, etc."
               >
                 {(txt) => <p>{txt}</p>}
               </FormattedMessage>
