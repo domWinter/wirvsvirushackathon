@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { Badge, Button } from 'react-bootstrap';
 import { FormattedDate, FormattedTime, FormattedMessage, useIntl, defineMessages } from "react-intl";
@@ -27,7 +27,7 @@ type MapProps = {
 };
 
 const MUNICH = [48.13743, 11.57549];
-const MAX = 0.3;
+const MAX = 0.53;
 const INTENSITY_FACTOR = 4;
 
 export const Map = ({heatMap, markers} : MapProps) => {
@@ -35,6 +35,7 @@ export const Map = ({heatMap, markers} : MapProps) => {
   const messages = defineMessages({
     marker: { id: 'marker', defaultMessage: 'Marker' },
     heatMap: { id: 'heatMap', defaultMessage: 'Heat Map' },
+    totalCapacity: { id: 'totalCapacity', defaultMessage: 'Total Capacity' },
     ecmo: { id: 'ecmo', defaultMessage: 'ECMO' },
     iculc: { id: 'iculc', defaultMessage: 'ICULC' },
     icuhc: { id: 'iculc', defaultMessage: 'ICUHC' }
@@ -53,7 +54,20 @@ export const Map = ({heatMap, markers} : MapProps) => {
             attribution="&copy; <a href=http://osm.org/copyright>OpenStreetMap</a> contributors"
           />
         </LayersControl.BaseLayer>
-        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.iculc)} checked>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.totalCapacity)} checked>
+          <FeatureGroup color="purple">
+            <HeatmapLayer
+              fitBoundsOnLoad
+              fitBoundsOnUpdate
+              points={heatMap}
+              longitudeExtractor={m => m.longitude}
+              latitudeExtractor={m => m.latitude}
+              intensityExtractor={m => (m.sumIntensity)*INTENSITY_FACTOR}
+              max={MAX}
+            />
+          </FeatureGroup>
+        </LayersControl.Overlay>
+        <LayersControl.Overlay name={intl.formatMessage(messages.heatMap) + " " + intl.formatMessage(messages.iculc)}>
           <FeatureGroup color="purple">
             <HeatmapLayer
               fitBoundsOnLoad
@@ -101,22 +115,28 @@ export const Map = ({heatMap, markers} : MapProps) => {
                 <Popup>
                   <span>{name}</span>
                   <FormattedMessage
+                    id="totalCapacity"
+                    defaultMessage="Total Capacit"
+                  >
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc+icuhc+ecmo,iculcMax+icuhcMax+ecmoMax)}>{(iculcMax+icuhcMax+ecmoMax-(iculc+icuhc+ecmo)) + "/" + (iculcMax+icuhcMax+ecmoMax)}</Badge></p>}
+                  </FormattedMessage>
+                  <FormattedMessage
                     id="iculc"
                     defaultMessage="ICULC"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc,iculcMax)}>{iculc + "/" + iculcMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(iculc,iculcMax)}>{(iculcMax-iculc) + "/" + iculcMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="icuhc"
                     defaultMessage="ICUHC"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(icuhc,icuhcMax)}>{icuhc + "/" + icuhcMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(icuhc,icuhcMax)}>{(icuhcMax-icuhc) + "/" + icuhcMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="ecmo"
                     defaultMessage="ECMO"
                   >
-                    {(txt) => <p>{txt} <Badge pill variant={compVariant(ecmo,ecmoMax)}>{ecmo + "/" + ecmoMax}</Badge></p>}
+                    {(txt) => <p>{txt} <Badge pill variant={compVariant(ecmo,ecmoMax)}>{(ecmoMax-ecmo) + "/" + ecmoMax}</Badge></p>}
                   </FormattedMessage>
                   <FormattedMessage
                     id="updated"

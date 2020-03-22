@@ -1,6 +1,6 @@
 import React, { useEffect, useState }  from 'react';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import { Button, Container, Row, Col, Card } from 'react-bootstrap';
+import { Button, Row, Col, Card } from 'react-bootstrap';
 import { useIntl, defineMessages } from "react-intl";
 
 import {
@@ -27,7 +27,7 @@ export const HospitalRoute = () => {
     icuhc: { id: 'icuhc', defaultMessage: 'ICUHC' },
     ecmo: { id: 'ecmo', defaultMessage: 'ECMO' },
     back: { id: 'back', defaultMessage: 'Back' },
-    bedCapacity: { id: 'bedCapacity', defaultMessage: 'Bed Capacity' }
+    freeBedCapacity: { id: 'freeBedCapacity', defaultMessage: 'Free Bed Capacity' }
   });
 
   const transformBedAvailability = (bedAvailability)  => {
@@ -86,8 +86,8 @@ export const HospitalRoute = () => {
       </Row>
       <Row>
         <Col>
-          <Card className="bg-dark text-white">
-          <Card.Header><h2>{intl.formatMessage(messages.bedCapacity)}</h2></Card.Header>
+          <Card className="bg-dark">
+          <Card.Header className="text-white"><h2>{intl.formatMessage(messages.freeBedCapacity)}</h2></Card.Header>
             {bedAvailabilityData && <LineChart height={'800px'} width={'100%'} data={bedAvailabilityData} />}
           </Card> 
         </Col>
