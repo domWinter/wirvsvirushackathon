@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: api
-        image: wirvsvirushackathon.azurecr.io/api:1
+        image: wirvsvirushackathon.azurecr.io/api:2
         env:
         - name: PASSWORD
           value: ""
@@ -38,7 +38,7 @@ spec:
     spec:
       containers:
       - name: web
-        image: wirvsvirushackathon.azurecr.io/web:5
+        image: wirvsvirushackathon.azurecr.io/web:6
         ports:
         - containerPort: 5000
 
