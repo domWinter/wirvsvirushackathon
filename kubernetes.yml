@@ -62,8 +62,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
+  annotations:
+    service.beta.kubernetes.io/azure-load-balancer-resource-group: wirvsvirushackathon
   name: web-service
 spec:
+  loadBalancerIP: 20.185.99.93
   type: LoadBalancer
   selector:
     app: web

@@ -4,7 +4,7 @@ import { MapDataEntry, HeatMap, Marker } from '../types';
 import Client from '../client/client';
 import Map from './MapChart';
 
-export const MapRoute = () => {
+export const MapRoute = ({date}) => {
   const [heatMap, setHeatMap] = useState<HeatMap | undefined>();
   const [markers, setMarkers] = useState<Marker[] | undefined>();
   const transformData = (mapData) => {
@@ -66,10 +66,10 @@ export const MapRoute = () => {
 
   useEffect(() => {
     const client = new Client();
-    client.getMapData()
+    client.getMapData({date: Math.round(date)})
     .then(transformData)
     .catch((error) => console.error(error));
-  }, []);
+  }, [date]);
   
   return (
     <>

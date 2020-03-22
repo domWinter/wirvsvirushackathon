@@ -35,7 +35,7 @@ export class Repository implements RepositoryI {
         }
         return Promise.reject(new Error('No such hospital'));
     }
-    getMapData(): Promise<MapData> {
+    getMapData({date}): Promise<MapData> {
         return Promise.reject(new Error("Method not implemented."));
     }
 }

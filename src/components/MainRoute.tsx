@@ -1,10 +1,16 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Row, Col, Card} from 'react-bootstrap';
 import HospitalsRoute from './HospitalsRoute';
-import { FormattedMessage } from "react-intl";
+import { useIntl, FormattedMessage } from "react-intl";
 import MapRoute from './MapRoute';
+import Slider from './Slider';
+
+const DAYS = 100;
 
 export const MainRoute = () => {
+  const intl = useIntl();
+  const [date,setDate] = useState(Date.now()/1000);
+
   return (
     <>
         <Row style={{margin: 0}}>
@@ -17,7 +23,21 @@ export const MainRoute = () => {
               >
                 {(txt) => <Card.Header><h2>{txt}</h2></Card.Header>}
               </FormattedMessage>
-              <MapRoute />
+              <div style={{padding: '0 50px 30px 50px'}}>
+                <Slider max={DAYS} min={0}
+                  onChange={(value) => {
+                    let d = new Date()
+                    d.setDate(d.getDate()-(DAYS-value));
+                    setDate(d.getTime()/1000);
+                  }}
+                  formatLabel={(value) => {
+                    let d = new Date()
+                    d.setDate(d.getDate()-(DAYS-value));
+                    return intl.formatDate(d)
+                  }}
+                />
+              </div>
+              <MapRoute date={date}/>
               <FormattedMessage
                 id="heatMapEpxlanation"
                 description="Explanation for the heat map"

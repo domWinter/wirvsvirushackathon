@@ -53,5 +53,5 @@ export interface Repository {
     getBedAvailability(id: number) : Promise<BedAvailability[]>;
     getHospitals() : Promise<Hospital[]>;
     getHospitalById(id: number) : Promise<Hospital>;
-    getMapData() : Promise<MapData>;
+    getMapData({date: number}) : Promise<MapData>;
 }
