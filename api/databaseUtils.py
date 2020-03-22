@@ -70,7 +70,7 @@ def updateBeds(conn,hospitalID,iculc, icuhc, ecmo,timestamp="current"):
         print(inst.args)
 
 
-def getMapData(conn):
+def getLatestMapData(conn):
     cur = conn.cursor()
     try:
         query =  "SELECT hospitals.* , bedTemp.* FROM hospitals INNER JOIN  (SELECT  * , RANK() OVER (PARTITION BY bed1.hospitalID ORDER BY bed1.timestamp DESC ) as rnk FROM bedavailability bed1 ) as bedTemp ON hospitals.id = bedTemp.hospitalID WHERE bedTemp.rnk <2;"
@@ -80,3 +80,12 @@ def getMapData(conn):
     except:
         return None
 
+def getLatestMapDataBefore(conn, timestamp):
+    cur = conn.cursor()
+    try:
+        query = "SELECT hospitals.* , bedTemp.* FROM hospitals INNER JOIN  (SELECT  * , RANK() OVER (PARTITION BY bed1.hospitalID ORDER BY bed1.timestamp DESC ) as rnk FROM bedavailability bed1 where bed1.timestamp < timestamp '" + str(timestamp) + "') as bedTemp ON hospitals.id = bedTemp.hospitalID WHERE bedTemp.rnk <2;"
+        cur.execute(query)
+        joinedDataSQL = cur.fetchall()
+        return joinedDataSQL
+    except:
+        return None

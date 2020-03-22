@@ -4,6 +4,7 @@ import psycopg2
 import databaseUtils
 from flask import Flask, request, jsonify
 from geoUtils import getGeoLocation
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -176,36 +177,42 @@ def getLatestBedavailability():
 @app.route('/mapdata', methods=['GET'])
 def getmapdata():
 
-    joinedDataSQL = databaseUtils.getMapData(conn)
-
     joinedData = []
+    joinedDataSQL = None
+
+    if 'date' in request.args:
+        timestampUnix = int(request.args.get('date'))
+        datetimeObj = datetime.fromtimestamp(timestampUnix)
+        sqlDate = datetimeObj.strftime("%Y-%m-%d %H:%M:%S")
+        joinedDataSQL = databaseUtils.getLatestMapDataBefore(conn, sqlDate)
+    else:
+        joinedDataSQL = databaseUtils.getLatestMapData(conn)
 
     if joinedDataSQL is None:
         return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
-
     try:
         for row in joinedDataSQL:
             joinedData.append({'id' : int(row[0]), 
-                        'name': str(row[1]), 
-                        'state' : str(row[2]), 
-                        'city' : str(row[3]), 
-                        'postcode': str(row[4]), 
-                        'street' : str(row[5]), 
-                        'streetNumber': str(row[6]),
-                        'phoneNumber' : str(row[7]),
-                        'website' : str(row[8]),
-                        'latitude' : str(row[9]), 
-                        'longitude' : str(row[10]),
-                        'hospitalID': int(row[12]),
-                        'iculc' : int(row[13]),
-                        'icuhc' : int(row[14]),
-                        'ecmo': int(row[15]),
-                        'iculcMax' : int(row[16]),
-                        'icuhcMax' : int(row[17]),
-                        'ecmoMax': int(row[18]),
-                        'timestamp' : str(row[19])
-                        })
+                            'name': str(row[1]), 
+                            'state' : str(row[2]), 
+                            'city' : str(row[3]), 
+                            'postcode': str(row[4]), 
+                            'street' : str(row[5]), 
+                            'streetNumber': str(row[6]),
+                            'phoneNumber' : str(row[7]),
+                            'website' : str(row[8]),
+                            'latitude' : str(row[9]), 
+                            'longitude' : str(row[10]),
+                            'hospitalID': int(row[12]),
+                            'iculc' : int(row[13]),
+                            'icuhc' : int(row[14]),
+                            'ecmo': int(row[15]),
+                            'iculcMax' : int(row[16]),
+                            'icuhcMax' : int(row[17]),
+                            'ecmoMax': int(row[18]),
+                            'timestamp' : str(row[19])
+                            })
     except:
-        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
+        return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}    
 
     return json.dumps({"data" : joinedData}), 200, {'ContentType':'application/json'}
