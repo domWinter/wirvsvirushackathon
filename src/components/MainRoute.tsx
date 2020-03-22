@@ -22,10 +22,22 @@ export const MainRoute = () => {
                         <Col sm={3}>
                           <Nav variant="pills" className="flex-column">
                             <Nav.Item>
-                              <Nav.Link eventKey="first">Website</Nav.Link>
+                              <FormattedMessage
+                                id="website"
+                                description="website"
+                                defaultMessage="Website"
+                              >
+                                {(txt) => <Nav.Link eventKey="first">{txt}</Nav.Link>}
+                              </FormattedMessage>
                             </Nav.Item>
                             <Nav.Item>
-                              <Nav.Link eventKey="second">Funktionserklärung</Nav.Link>
+                            <FormattedMessage
+                                id="featureDescription"
+                                description="Functions"
+                                defaultMessage="Feature Description"
+                              >
+                                {(txt) => <Nav.Link eventKey="second">{txt}</Nav.Link>}
+                            </FormattedMessage>
                             </Nav.Item>
                             <Nav.Item>
                               <Nav.Link eventKey="third">ICULC / ICUHC / ECMO</Nav.Link>
