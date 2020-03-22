@@ -6,9 +6,8 @@ import MapRoute from './MapRoute';
 export const MainRoute = () => {
   return (
     <>
-      <Container>
         <Row>
-          <Col>
+          <Col style={{ maxWidth: '100%' }}>
             <Card className="bg-dark text-white">
               <Card.Header><h2>Krankenhäuser</h2></Card.Header>
               <HospitalsRoute />
@@ -16,14 +15,13 @@ export const MainRoute = () => {
           </Col>
         </Row> 
         <Row>
-          <Col>
+          <Col style={{ maxWidth: '100%' }}>
             <Card className="bg-dark text-white">
             <Card.Header><h2>Heatmap</h2></Card.Header>
                 <MapRoute />
             </Card>
           </Col>
         </Row>
-      </Container>
     </>
   );
 };
