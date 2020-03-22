@@ -19,10 +19,23 @@ export const MapRoute = () => {
       ecmo,
       ecmoMax,
       timestamp,
+      id,
       ...rest
     }:MapDataEntry) => {
       return {
-        markers: [...markers, {longitude,latitude,name,timestamp}],
+        markers: [...markers, {
+          longitude,
+          latitude,
+          name,
+          timestamp,
+          iculc,
+          iculcMax,
+          icuhc,
+          icuhcMax,
+          ecmo,
+          id,
+          ecmoMax
+        }],
         heatMap: [
           ...heatMap,
           {

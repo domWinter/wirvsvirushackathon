@@ -28,18 +28,18 @@ const Hospital = ({
             {(address) =><th>{address}</th>}
           </FormattedMessage>
           <FormattedMessage
-            id="phone"
-            description="Phone number"
-            defaultMessage="Phone number"
-          >
-            {(txt) => <th>{txt}</th>}
-          </FormattedMessage>
-          <FormattedMessage
             id="website"
             description="website"
             defaultMessage="Website"
           >
             {(websiteTxt) => <th>{websiteTxt}</th>}
+          </FormattedMessage>
+          <FormattedMessage
+            id="phone"
+            description="Phone number"
+            defaultMessage="Phone number"
+          >
+            {(txt) => <th>{txt}</th>}
           </FormattedMessage>
         </tr>
       </thead>
@@ -49,9 +49,9 @@ const Hospital = ({
           <td>{street} {streetNumber}<br/>
           {postcode}, {city}</td>
           <FormattedMessage
-            id="phone"
-            description="Phone number"
-            defaultMessage="Phone number"
+            id="link"
+            description="link"
+            defaultMessage="Link"
           >
             {(txt) => <td><a href={website}><Button size="sm" variant="info">{txt}</Button>{' '}</a></td>}
           </FormattedMessage>
