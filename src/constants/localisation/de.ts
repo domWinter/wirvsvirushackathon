@@ -1,5 +1,5 @@
-// const LOCALE = (window.navigator as any).userLanguage || window.navigator.language || 'de';
-const LOCALE = 'de';
+const LOCALE = (window.navigator as any).userLanguage || window.navigator.language || 'de';
+// const LOCALE = 'de';
 const MESSAGES = {
   'address': 'Adresse',
   'availableBeds': 'Verfügbare Betten',
