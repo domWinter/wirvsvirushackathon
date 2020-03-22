@@ -106,9 +106,9 @@ export const MainRoute = () => {
             <Col style={{ maxWidth: '100%', 'padding': 0 }}>
               <Card className="bg-dark text-white">
                 <FormattedMessage
-                  id="heatMap"
-                  description="heatMap"
-                  defaultMessage="Heat Map"
+                  id="heatMapBedCapacity"
+                  description="heatMapBedCapacity"
+                  defaultMessage="Bed Capacity - Heat Map"
                 >
                   {(txt) => <Card.Header><h2>{txt}</h2></Card.Header>}
                 </FormattedMessage>
