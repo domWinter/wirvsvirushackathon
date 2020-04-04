@@ -25,7 +25,7 @@ export const MainRoute = () => {
                               <FormattedMessage
                                 id="website"
                                 description="website"
-                                defaultMessage="Website"
+                                defaultMessage="Project Description"
                               >
                                 {(txt) => <Nav.Link eventKey="first">{txt}</Nav.Link>}
                               </FormattedMessage>
@@ -34,13 +34,19 @@ export const MainRoute = () => {
                             <FormattedMessage
                                 id="featureDescription"
                                 description="Functions"
-                                defaultMessage="Feature Description"
+                                defaultMessage="How to use it"
                               >
                                 {(txt) => <Nav.Link eventKey="second">{txt}</Nav.Link>}
                             </FormattedMessage>
                             </Nav.Item>
                             <Nav.Item>
-                              <Nav.Link eventKey="third">ICULC / ICUHC / ECMO</Nav.Link>
+                            <FormattedMessage
+                                id="featureDescription"
+                                description="Functions"
+                                defaultMessage="Feature Description"
+                              >
+                                {(txt) => <Nav.Link eventKey="third">{txt}</Nav.Link>}
+                                </FormattedMessage>
                             </Nav.Item>
                           </Nav>
                         </Col>
@@ -50,17 +56,21 @@ export const MainRoute = () => {
                               <FormattedMessage
                                 id="websiteDescription"
                                 description="Explanation of the website"
-                                defaultMessage="Visualization of the occupation of hospital beds in Munich. This is a demo site for the #WirvsVirus hackathon of the German government. This site does not contain real data! 
-                                We want to visualise how many beds of the type ICULC, ICUH and ECMO are available in the respective hospitals."
+                                defaultMessage="Real-time monitoring of available beds for intensive care units in Swiss Hospitals. 
+                                During the Corona-Crisis, ICU beds and ventilators are of the essence to preserve human life. 
+                                This #versusvirus hackathon project, aims to first monitor the data in realtimea and secondly process the data into one localized system and visualization. 
+                                The third step is to base a model on the available data to forecast the need of beds in certain areas. "
                               >
-                                {(txt) => <><p><a href="https://wirvsvirushackathon.org/"><img src={'/logo.png'} alt="Logo" id='logo'/></a>{txt}</p></>}
+                                {(txt) => <><p><a href="https://www.versusvirus.ch/"><img src={'/logo.png'} alt="Logo" id='logo'/></a>{txt}</p></>}
                               </FormattedMessage>
                             </Tab.Pane>
                             <Tab.Pane style={{ fontSize:'14pt'}} eventKey="second">
                               <FormattedMessage
                                 id="heatMapExplanation"
                                 description="Explanation for the heat map"
-                                defaultMessage="Use the layer button on the right to visualise the bed capacities for different categories. You can change the date using the slider. Click on a marker to get more information about the chosen hospital."
+                                defaultMessage="Use the layer button on the right to visualise the bed capacities for different categories. 
+                                You can change the date using the slider. Currently, there is only past data available.
+                                Click on a marker to get more information about the chosen hospital."
                               >
                                 {(txt) => <p>{txt}</p>}
                               </FormattedMessage>
@@ -108,7 +118,7 @@ export const MainRoute = () => {
                 <FormattedMessage
                   id="heatMapBedCapacity"
                   description="heatMapBedCapacity"
-                  defaultMessage="Bed Capacity - Heat Map"
+                  defaultMessage="Hospital Capacity"
                 >
                   {(txt) => <Card.Header><h2>{txt}</h2></Card.Header>}
                 </FormattedMessage>
