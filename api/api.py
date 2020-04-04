@@ -1,6 +1,5 @@
 import os
 import json
-import psycopg2
 import databaseUtils
 from flask import Flask, request, jsonify
 from geoUtils import getGeoLocation
@@ -8,25 +7,9 @@ from datetime import datetime
 
 app = Flask(__name__)
 
-PASSWORD = os.getenv('PASSWORD') 
-
-try:
-    conn = psycopg2.connect(database = "wirvsvirushackathon", 
-                            user = "app@postgres-wirvsvirushackathon", 
-                            password = PASSWORD, 
-                            host = "postgres-wirvsvirushackathon.postgres.database.azure.com", 
-                            port = "5432")
-except:
-    print("Unable to connect to the database") 
-    os._exit(0)
-
-cur = conn.cursor()
-
-
 @app.route('/hospitals', methods=['GET'])
 def getHospitals():
-
-    hospitalsSQL = databaseUtils.getAllHospitals(conn)
+    hospitalsSQL = databaseUtils.getAllHospitals()
     if hospitalsSQL is None:
         return json.dumps({"data" : []}), 500, {'ContentType':'application/json'}
 
@@ -56,7 +39,7 @@ def getHospitals():
 @app.route('/hospital', methods=['GET'])
 def getHospitalByID():
     requestHospitalID = request.args.get('id')
-    hospitalSQL = databaseUtils.getHospitalbyID(conn, requestHospitalID)[0]
+    hospitalSQL = databaseUtils.getHospitalbyID(requestHospitalID)[0]
     if hospitalSQL is None:
         return json.dumps({"data": {} }), 500, {'ContentType':'application/json'}
 
@@ -106,8 +89,7 @@ def addHospital():
     if latitude == 0 or longitude == 0:
         return json.dumps({"data": {'success' : False} }), 404, {'ContentType':'application/json'}
 
-    ok = databaseUtils.addHospital(conn, 
-                                        hospital['name'],
+    ok = databaseUtils.addHospital(hospital['name'],
                                         hospital['address']['state'],
                                         hospital['address']['city'],
                                         hospital['address']['postcode'],
@@ -155,7 +137,7 @@ def getBedavailability():
 def getLatestBedavailability():
     requestHospitalID = request.args.get('id')
 
-    bedavailabilitySQL = databaseUtils.getLatestBedavailability(conn, requestHospitalID)[0]
+    bedavailabilitySQL = databaseUtils.getLatestBedavailability(requestHospitalID)[0]
 
     if bedavailabilitySQL is None:
         return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
@@ -184,9 +166,9 @@ def getmapdata():
         timestampUnix = int(request.args.get('date'))
         datetimeObj = datetime.fromtimestamp(timestampUnix)
         sqlDate = datetimeObj.strftime("%Y-%m-%d %H:%M:%S")
-        joinedDataSQL = databaseUtils.getLatestMapDataBefore(conn, sqlDate)
+        joinedDataSQL = databaseUtils.getLatestMapDataBefore(sqlDate)
     else:
-        joinedDataSQL = databaseUtils.getLatestMapData(conn)
+        joinedDataSQL = databaseUtils.getLatestMapData()
 
     if joinedDataSQL is None:
         return json.dumps({"data" : {}}), 404, {'ContentType':'application/json'}
