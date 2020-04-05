@@ -1,44 +1,40 @@
 import requests
+import json
+
 
 def testHospitalAdd():
-        '''
-        hospital1 = { 'name': "München Klinik Bogenhausen",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "81925", 'street' : "Englschalkinger Str.", 'streetNumber': "77"},
-                    'phoneNumber' : '08992700',
-                    'website' : 'https://www.muenchen-klinik.de/krankenhaus/bogenhausen/',
-                }
 
-        hospital2 = { 'name':  "München Klinik Neuperlach",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "81373", 'street' : "Oskar-Maria-Graf-Ring", 'streetNumber': "51"},
-                    'phoneNumber' : '08967940',
-                    'website' : 'https://www.muenchen-klinik.de/krankenhaus/neuperlach/',
-                }
+    hospitals = """{"hospitals":[
+                 {"name":  "Hirslanden Klinik Aarau",
+                 "address": {"state": "Aargau", "city": "Aarau", "postcode": "5001", "street": "Schänisweg", "streetNumber": "1"},
+                 "phoneNumber": "+41 628367000",
+                 "website": "http://www.hirslanden.ch/"
+                 },
+                 {"name": "UniversitätsSpital Zürich",
+                 "address": {"state": "Zürich", "city": "Zürich", "postcode": "8091", "street": "Rämistrasse", "streetNumber": "100"},
+                 "phoneNumber": "+41 44 255 11 11", "website": "http://www.usz.ch/"
+                 },
+                 {"name": " Cliniques des Grangettes ",
+                 "address": {"state": "Genève", "city": "Genève", "postcode": " 1224", "street": "chemin des Grangettes", "streetNumber": "7"},
+                 "phoneNumber": "+41 44 255 11 11", "website": "http://www.grangettes.ch/"
+                 }]
+                 }"""
 
-        hospital3 = { 'name':  "München Klinik Schwabing",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "80804", 'street' : "Kölner Pl.", 'streetNumber': "1"},
-                    'phoneNumber' : '08930680',
-                    'website' : 'https://www.muenchen-klinik.de/krankenhaus/schwabing/'
-                    }
-        hospital5 = { 'name':  "Klinikum rechts der Isar",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "81675", 'street' : "Ismaninger Str.", 'streetNumber': "22"},
-                    'phoneNumber' : '08941400',
-                    'website' : 'https://https://www.mri.tum.de/'
-                    }
-        hospital6 = { 'name':  "Krankenhaus Neuwittelsbach",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "80639", 'street' : "Renatastraße", 'streetNumber': "71A"},
-                    'phoneNumber' : '08913040',
-                    'website' : 'https://www.krankenhaus-neuwittelsbach.de/'
-                    }
-                    '''
-        hospital4 = { 'name':  "Rotkreuzklinikum München",
-                    'address': {'state' : "Bayern" , 'city' : "München", 'postcode': "80634", 'street' : "Nymphenburger Str.", 'streetNumber': "163"},
-                    'phoneNumber' : '08913030',
-                    'website' : 'https://www.rotkreuzklinikum-muenchen.de/'
-                    }
+    # creates problems in geolocation:
+    #    {"name": "Clinique Ste-Anne",
+    #             "address": {"state": "Switzerland", "city": "Fribourg", "postcode": "1700", "street": "rue H. Geiler", "streetNumber": "6"},
+    #             "phoneNumber": "+41 3500111",
+    #             "website": "http://www.ste-anne.ch",
+    #             }
 
-        r = requests.post("http://127.0.0.1:5000/hospital/add", json={'data': hospital4})
-        print(r.status_code, r.reason)
+    to_python = json.loads(hospitals)
+    print(to_python["hospitals"])
 
+
+    for hospital in to_python["hospitals"]:
+       print(hospital)     
+       r = requests.post("http://127.0.0.1:5000/hospital/add", json={"data": hospital})
+       print(r.status_code, r.reason) 
 
 
 if __name__ == '__main__':
