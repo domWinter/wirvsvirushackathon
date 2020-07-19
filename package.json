@@ -17,7 +17,7 @@
     "formik": "^2.1.4",
     "google-maps-react": "^2.0.2",
     "leaflet": "^1.6.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "nivo": "^0.31.0",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",
