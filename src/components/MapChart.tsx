@@ -115,12 +115,6 @@ export const Map = ({heatMap, markers} : MapProps) => {
                 <Popup>
                   <span>{name}</span>
                   <FormattedMessage
-                    id="nurses"
-                    defaultMessage="Professional Nurses"
-                  >
-                    {(txt) => <p>{txt} <Badge>17</Badge></p>}
-                  </FormattedMessage>
-                  <FormattedMessage
                     id="totalCapacity"
                     defaultMessage="Total Capacit"
                   >

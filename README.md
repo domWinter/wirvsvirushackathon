@@ -17,37 +17,6 @@ Gerade bei dem aktuellen Notstand ist es sehr unübersichtlich zu Erfahren in we
 * python3
 * python3-pip
 
-## Additional dependencies for Fedora
-```
-sudo dnf install libpq-devel
-sudo dnf install python3-devel
-yum install nodejs-yarn
-sudo dnf install postgresql postgresql-server
-sudo postgresql-setup --initdb --unit postgresql
-sudo systemctl start postgresql  
-sudo su - postgres
-createuser testuser -P
-createdb testdb --owner testuser
-$ vim ~/data/pg_hba.conf
-# "local" is for Unix domain socket connections only
-local   all             all                                     trust
-host    all             all             127.0.0.1/32            trust
-
-sudo systemctl restart postgresql.service
-# update connect parameters in databaseUtils.py to use testuser and testdb
-
-# create DB structure and entries
-psql  -d testdb -U testuser
-CREATE TABLE hospitals ( id serial primary key, name varchar(100) NOT NULL, state varchar(100) NOT NULL, city varchar(100) NOT NULL, postcode varchar(100) NOT NULL, street varchar(100) NOT NULL,streetNumber varchar(100) NOT NULL, phoneNumber varchar(100) NOT NULL, website varchar(100),latitude varchar(100),longitude varchar(100));
-CREATE TABLE bedavailability ( id serial primary key, hospitalID serial REFERENCES hospitals(id), iculc integer NOT NULL, icuhc integer NOT NULL, ecmo integer NOT NULL, iculcMax integer NOT NULL, icuhcMax integer NOT NULL, ecmoMax integer NOT NULL, timestamp date NOT NULL );
-ctrl-D
-cd api
-python3 add_hospitals.py
-
-# add example data for bed availability via DB 
-insert into bedavailability VALUES(1,1,200,50,20,300,100,50,'2020-4-4 13:40:16');
-insert into bedavailability VALUES(2,2,200,50,20,300,100,50,'2020-4-4 13:40:16');
-```
 
 ## Build
 

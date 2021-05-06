@@ -6,7 +6,6 @@ import { FormattedMessage, FormattedDate, FormattedTime } from "react-intl";
 import { compVariant } from '../utils/utils';
 
 const BedAvailability = ({
-  nurses,
   iculc,
   iculcMax,
   icuhc,
@@ -19,12 +18,6 @@ const BedAvailability = ({
     <Table style={ { height: 145 } } striped bordered hover variant="dark">
       <thead>
         <tr>
-        <FormattedMessage
-            id="nurses"
-            defaultMessage="Professional Nurses"
-          >
-            {(txt) => <th>{txt}</th>}
-          </FormattedMessage>
           <FormattedMessage
             id="totalCapacity"
             defaultMessage="Total Capacity"
